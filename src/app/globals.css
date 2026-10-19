@@ -1,13 +1,73 @@
 @import "tailwindcss";
 
+/* Semantic brand tokens — remapped per theme so existing utilities adapt */
+:root,
+[data-theme="dark"] {
+  --shindara-obsidian: #090a0b;
+  --shindara-obsidian-deep: #040506;
+  --shindara-charcoal: #141618;
+  --shindara-charcoal-light: #1c1f23;
+  --shindara-gold: #d6ad59;
+  --shindara-gold-bright: #f2d28b;
+  --shindara-gold-dark: #8c6e26;
+  --shindara-gold-muted: #a68b44;
+  --shindara-ivory: #f6f3ec;
+  --shindara-silver: #b7babd;
+  --shindara-silver-light: #d4d7db;
+  --shindara-white: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(214, 173, 89, 0.35);
+  --color-overlay: rgba(9, 10, 11, 0.72);
+  --color-muted-surface: rgba(20, 22, 24, 0.85);
+  --shadow-soft: 0 18px 50px -20px rgba(0, 0, 0, 0.75);
+  --scrollbar-track: #090a0b;
+  --scrollbar-thumb: #2a2e33;
+  --body-glow-a: rgba(214, 173, 89, 0.07);
+  --body-glow-b: rgba(214, 173, 89, 0.03);
+  --grid-line: rgba(255, 255, 255, 0.03);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  /* Cool stone light — premium, not cream/terracotta */
+  --shindara-obsidian: #f4f5f7;
+  --shindara-obsidian-deep: #ebecef;
+  --shindara-charcoal: #ffffff;
+  --shindara-charcoal-light: #f0f1f4;
+  --shindara-gold: #b8923f;
+  --shindara-gold-bright: #c9a24d;
+  --shindara-gold-dark: #7a6124;
+  --shindara-gold-muted: #9a7d3a;
+  --shindara-ivory: #121417;
+  --shindara-silver: #5a5f66;
+  --shindara-silver-light: #3d4248;
+  --shindara-white: #ffffff;
+  --color-border: rgba(18, 20, 23, 0.1);
+  --color-border-strong: rgba(184, 146, 63, 0.4);
+  --color-overlay: rgba(244, 245, 247, 0.78);
+  --color-muted-surface: rgba(255, 255, 255, 0.92);
+  --shadow-soft: 0 18px 50px -24px rgba(18, 20, 23, 0.22);
+  --scrollbar-track: #ebecef;
+  --scrollbar-thumb: #c5c8ce;
+  --body-glow-a: rgba(184, 146, 63, 0.08);
+  --body-glow-b: rgba(18, 20, 23, 0.03);
+  --grid-line: rgba(18, 20, 23, 0.05);
+  color-scheme: light;
+}
+
 @theme inline {
-  --color-obsidian: #090a0b;
-  --color-charcoal: #151719;
-  --color-gold: #d6ad59;
-  --color-gold-bright: #f2d28b;
-  --color-ivory: #f6f3ec;
-  --color-silver: #b7babd;
-  --color-white: #ffffff;
+  --color-obsidian: var(--shindara-obsidian);
+  --color-obsidian-deep: var(--shindara-obsidian-deep);
+  --color-charcoal: var(--shindara-charcoal);
+  --color-charcoal-light: var(--shindara-charcoal-light);
+  --color-gold: var(--shindara-gold);
+  --color-gold-bright: var(--shindara-gold-bright);
+  --color-gold-dark: var(--shindara-gold-dark);
+  --color-gold-muted: var(--shindara-gold-muted);
+  --color-ivory: var(--shindara-ivory);
+  --color-silver: var(--shindara-silver);
+  --color-silver-light: var(--shindara-silver-light);
+  --color-white: var(--shindara-white);
   --font-display: var(--font-syne);
   --font-body: var(--font-manrope);
 }
@@ -21,6 +81,22 @@
 
   html {
     scroll-behavior: smooth;
+    min-width: 235px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--shindara-gold) 25%, transparent);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--shindara-gold);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -39,13 +115,19 @@
   }
 
   body {
-    background: var(--color-obsidian);
-    color: var(--color-ivory);
-    font-family: var(--font-body), system-ui, sans-serif;
-    min-width: 0;
+    background-color: var(--shindara-obsidian);
+    color: var(--shindara-ivory);
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+    min-width: 235px;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, var(--body-glow-a), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 60%, var(--body-glow-b), transparent);
+    background-attachment: fixed;
+    transition: background-color 0.35s ease, color 0.35s ease;
   }
 
   img,
@@ -61,31 +143,55 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-gold-bright);
+    outline: 2px solid var(--shindara-gold-bright);
     outline-offset: 3px;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-gold) 45%, transparent);
-    color: var(--color-white);
+    background: color-mix(in srgb, var(--shindara-gold) 40%, transparent);
+    color: var(--shindara-ivory);
   }
 }
 
 @layer utilities {
   .container-shell {
-    width: min(100% - 2rem, 72rem);
+    width: min(100% - 1rem, 76rem);
     margin-inline: auto;
+  }
+
+  @media (min-width: 280px) {
+    .container-shell {
+      width: min(100% - 1.25rem, 76rem);
+    }
+  }
+
+  @media (min-width: 360px) {
+    .container-shell {
+      width: min(100% - 1.5rem, 76rem);
+    }
   }
 
   @media (min-width: 480px) {
     .container-shell {
-      width: min(100% - 2.5rem, 72rem);
+      width: min(100% - 2rem, 76rem);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container-shell {
+      width: min(100% - 2.5rem, 76rem);
     }
   }
 
   @media (min-width: 1024px) {
     .container-shell {
-      width: min(100% - 4rem, 72rem);
+      width: min(100% - 3.5rem, 76rem);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .container-shell {
+      width: min(100% - 4rem, 80rem);
     }
   }
 
@@ -99,33 +205,106 @@
     background: linear-gradient(
       90deg,
       transparent,
-      color-mix(in srgb, var(--color-gold) 70%, transparent),
+      color-mix(in srgb, var(--shindara-gold) 65%, transparent),
+      transparent
+    );
+  }
+
+  .gold-divider-left {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--shindara-gold) 80%, transparent),
+      color-mix(in srgb, var(--shindara-gold) 15%, transparent),
       transparent
     );
   }
 
   .section-pad {
-    padding-block: clamp(4rem, 8vw, 7.5rem);
+    padding-block: clamp(3rem, 7vw, 8rem);
   }
 
   .eyebrow {
     font-family: var(--font-body), system-ui, sans-serif;
-    font-size: clamp(0.7rem, 1.4vw, 0.78rem);
-    letter-spacing: 0.22em;
+    font-size: clamp(0.62rem, 1.6vw, 0.78rem);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--shindara-gold);
+    font-weight: 600;
   }
 
   .display-title {
     font-family: var(--font-display), system-ui, sans-serif;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
   .safe-break {
     overflow-wrap: anywhere;
     word-break: break-word;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--shindara-gold-bright) 0%,
+      var(--shindara-gold) 55%,
+      var(--shindara-gold-dark) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card {
+    background: var(--color-muted-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+  }
+
+  .glass-card-gold {
+    background: var(--color-muted-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border-strong);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-card-hover {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card-hover:hover {
+    border-color: color-mix(in srgb, var(--shindara-gold) 50%, transparent);
+    transform: translateY(-3px);
+  }
+
+  .bg-glow-gold {
+    background: radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--shindara-gold) 14%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .bg-subtle-grid {
+    background-size: 32px 32px;
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  }
+
+  .theme-border {
+    border-color: var(--color-border);
+  }
+
+  .slider-frame {
+    border: 1px solid var(--color-border);
+    background: var(--color-charcoal);
+    box-shadow: var(--shadow-soft);
   }
 }

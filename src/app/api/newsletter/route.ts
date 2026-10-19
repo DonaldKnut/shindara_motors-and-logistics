@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "We could not complete your subscription right now. Please email hello@shindaraautos.com.",
+            "We could not complete your subscription right now. Please email hello@shindaraautos.com or oluwasina@shindaraautos.com.",
         },
         { status: 502 },
       );

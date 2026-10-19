@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { mailUnavailableMessage, sendTransactionalMail } from "@/lib/mail";
+import {
+  buildBrandedEmailHtml,
+  mailUnavailableMessage,
+  sendTransactionalMail,
+} from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { enquirySchema, isHoneypotTriggered } from "@/lib/validation";
 
@@ -60,6 +64,24 @@ export async function POST(request: Request) {
     const result = await sendTransactionalMail({
       subject: `Shindara major enquiry [${reference}] — ${payload.enquiryType}`,
       text: textBody,
+      html: buildBrandedEmailHtml({
+        title: `Major enquiry ${reference}`,
+        intro: "A detailed business enquiry was submitted on shindaraautos.com.",
+        rows: [
+          { label: "Reference", value: reference },
+          { label: "Name", value: payload.name },
+          { label: "Email", value: payload.email },
+          { label: "Phone", value: payload.phone },
+          { label: "Company", value: payload.company || "—" },
+          { label: "Country", value: payload.country },
+          { label: "Type", value: payload.enquiryType },
+          { label: "Budget", value: payload.budget || "—" },
+          { label: "Timeline", value: payload.timeline || "—" },
+          { label: "Preferred", value: payload.preferredContact },
+          { label: "Interest", value: payload.vehicleInterest || "—" },
+        ],
+        body: payload.message,
+      }),
       replyTo: payload.email,
       tags: ["enquiry", "major"],
     });
@@ -83,7 +105,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "We could not deliver your enquiry right now. Please email hello@shindaraautos.com or WhatsApp +27 77 389 6008.",
+            "We could not deliver your enquiry right now. Please email hello@shindaraautos.com or oluwasina@shindaraautos.com, or WhatsApp +27 77 389 6008.",
           reference,
         },
         { status: 502 },

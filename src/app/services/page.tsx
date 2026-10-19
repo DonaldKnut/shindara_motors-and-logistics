@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ServiceIcon } from "@/components/ui/Icons";
+import { ServicesGallery } from "@/components/services/ServicesGallery";
 import { services } from "@/data/services";
 
 export const metadata: Metadata = {
@@ -34,7 +35,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-t border-white/5 pb-[clamp(4rem,8vw,7rem)]">
+      <ServicesGallery />
+
+      <section className="border-t border-[var(--color-border)] pb-[clamp(4rem,8vw,7rem)]">
         <div className="container-shell grid gap-6 lg:gap-8">
           {services.map((service, index) => (
             <article

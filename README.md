@@ -6,9 +6,23 @@ Premium website for [shindaraautos.com](https://shindaraautos.com).
 
 - Next.js (App Router)
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS (light + dark theme via `data-theme`)
 - Framer Motion
 - Zod (contact form validation)
+
+## Themes
+
+Toggle light/dark from the header. Preference is stored in `localStorage` (`shindara-theme`).
+
+## Images & sliders
+
+Drop assets into:
+
+- `public/slides/` — hero / lifestyle frames
+- `public/vehicles/` — fleet photography
+
+Wire paths in `src/data/slides.ts` and vehicle `gallery` entries in `src/data/vehicles.ts`.  
+Use `placeholder: true` until a file exists — the UI shows a premium empty slot.
 
 ## Getting started
 

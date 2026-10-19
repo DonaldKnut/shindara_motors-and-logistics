@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { enquiryTypes } from "@/data/company";
+import { vehicles, vehicleLabel, getVehicleById } from "@/data/vehicles";
 
 type FormState = {
   name: string;
@@ -35,11 +36,17 @@ export function EnquiryForm() {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormState>(() => {
     const type = searchParams.get("type");
-    const vehicle = searchParams.get("vehicle");
+    const vehicleParam = searchParams.get("vehicle");
+    const vehicleId = searchParams.get("vehicleId");
+    const fromId = vehicleId ? getVehicleById(vehicleId) : undefined;
+    const vehicle =
+      (fromId ? vehicleLabel(fromId) : null) || vehicleParam || "";
     const matched =
       type && enquiryTypes.includes(type as (typeof enquiryTypes)[number])
         ? (type as (typeof enquiryTypes)[number])
-        : "General Enquiry";
+        : vehicle
+          ? "Automobile Sales"
+          : "General Enquiry";
 
     return {
       name: "",
@@ -51,7 +58,7 @@ export function EnquiryForm() {
       budget: "",
       timeline: "",
       preferredContact: "Email",
-      vehicleInterest: vehicle ?? "",
+      vehicleInterest: vehicle,
       message: vehicle
         ? `I would like to enquire about: ${vehicle}\n\n`
         : "",
@@ -247,12 +254,46 @@ export function EnquiryForm() {
             </option>
           </select>
         </div>
-        <Field
-          id="enq-vehicle"
-          label="Vehicle / service interest (optional)"
-          value={form.vehicleInterest}
-          onChange={(value) => setForm((p) => ({ ...p, vehicleInterest: value }))}
-        />
+        <div>
+          <label
+            htmlFor="enq-vehicle"
+            className="mb-2 block text-xs uppercase tracking-[0.16em] text-silver"
+          >
+            Vehicle of interest
+          </label>
+          <select
+            id="enq-vehicle"
+            className={fieldClass}
+            value={form.vehicleInterest}
+            onChange={(e) => {
+              const value = e.target.value;
+              setForm((p) => ({
+                ...p,
+                vehicleInterest: value,
+                enquiryType: value ? "Automobile Sales" : p.enquiryType,
+                message:
+                  value && !p.message.trim()
+                    ? `I would like to enquire about: ${value}\n\n`
+                    : p.message,
+              }));
+            }}
+          >
+            <option value="" className="bg-obsidian">
+              Select a vehicle (or leave blank)
+            </option>
+            {vehicles.map((v) => {
+              const label = vehicleLabel(v);
+              return (
+                <option key={v.id} value={label} className="bg-obsidian">
+                  {label} — {v.color}
+                </option>
+              );
+            })}
+            <option value="Other / sourcing request" className="bg-obsidian">
+              Other / sourcing request
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

@@ -1,3 +1,5 @@
+import { img } from "@/data/media";
+
 export type Service = {
   id: string;
   title: string;
@@ -20,8 +22,8 @@ export const services: Service[] = [
     description:
       "From private acquisitions to business fleet needs, we help you identify suitable vehicles and move from enquiry to ownership with clarity and care.",
     image: {
-      src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80",
-      alt: "Premium dark sports vehicle in dramatic studio lighting",
+      src: img("lexus.jpg", "v1792400602"),
+      alt: "Lexus ES from the Shindara sales inventory",
     },
     href: "/services/automobile-sales",
     enquireHref: "/enquire?type=Automobile%20Sales",
@@ -34,8 +36,8 @@ export const services: Service[] = [
     description:
       "Share your requirements and we coordinate the search, shortlist suitable options, and guide next steps with transparent communication throughout.",
     image: {
-      src: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80",
-      alt: "Front detail of a luxury vehicle headlight and bodywork",
+      src: img("prado.jpg", "v1792400606"),
+      alt: "Toyota Land Cruiser Prado available for sourcing",
     },
     href: "/services/vehicle-sourcing",
     enquireHref: "/enquire?type=Vehicle%20Sourcing",
@@ -48,8 +50,8 @@ export const services: Service[] = [
     description:
       "Whether you require guidance after purchase or assistance navigating related automotive needs, our team remains available with clear next steps.",
     image: {
-      src: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80",
-      alt: "Automotive workshop detail with precision tooling",
+      src: img("erdftu.jpg", "v1792400601"),
+      alt: "Verified Lexus V6 engine bay inspection",
     },
     href: "/services/automotive-support",
     enquireHref: "/enquire?type=Automotive%20Support",
@@ -62,8 +64,8 @@ export const services: Service[] = [
     description:
       "We support transportation and logistics requirements with a focus on planning, accountability, and a premium client experience from start to finish.",
     image: {
-      src: "https://images.unsplash.com/photo-1601584115197-04ecc1da4384?auto=format&fit=crop&w=1600&q=80",
-      alt: "Modern logistics fleet trucks parked in formation",
+      src: img("tototot.jpg", "v1792400607"),
+      alt: "Land Cruiser Prado ready for logistics dispatch",
     },
     href: "/services/logistics-solutions",
     enquireHref: "/enquire?type=Logistics%20Solutions",
@@ -76,8 +78,8 @@ export const services: Service[] = [
     description:
       "From scheduled movements to specialised transport needs, we work with businesses to structure reliable, professional transport solutions.",
     image: {
-      src: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=80",
-      alt: "Executive vehicle on an open coastal road at dusk",
+      src: img("mercedes.jpg", "v1792400602"),
+      alt: "Mercedes-Benz GLA for executive transport",
     },
     href: "/services/business-transport",
     enquireHref: "/enquire?type=Business%20Transport",

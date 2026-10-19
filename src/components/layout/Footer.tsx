@@ -34,26 +34,38 @@ export function Footer() {
                 alt="Shindara Motors & Logistics Limited"
                 width={180}
                 height={180}
-                className="h-auto w-[5rem] object-contain"
+                className="h-auto w-[5.5rem] object-contain"
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-silver">
-              Premium automotive solutions and dependable logistics — delivered
-              with precision, integrity, and purpose.
+              World-class automotive sourcing, bespoke vehicle sales, and trans-continental logistics — engineered with absolute precision, discretion, and reliability.
             </p>
-            <p className="mt-4 text-xs uppercase tracking-[0.2em] text-gold">
+            <p className="mt-4 text-xs uppercase tracking-[0.2em] text-gold font-semibold">
               {company.tagline}
             </p>
+
+            {/* Trust Badges */}
+            <div className="mt-6 flex flex-wrap gap-2 text-[0.65rem] text-silver/80">
+              <span className="px-2.5 py-1 rounded bg-obsidian border border-white/10">
+                ✓ RC / CAC Registered
+              </span>
+              <span className="px-2.5 py-1 rounded bg-obsidian border border-white/10">
+                ✓ Full Marine Escrow
+              </span>
+              <span className="px-2.5 py-1 rounded bg-obsidian border border-white/10">
+                ✓ Priority Customs Channel
+              </span>
+            </div>
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-xs uppercase tracking-[0.2em] text-ivory">
+            <h2 className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
               Navigate
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-silver">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-gold-bright">
+                  <Link href={link.href} className="hover:text-gold-bright transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -62,7 +74,7 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h2 className="text-xs uppercase tracking-[0.2em] text-ivory">
+            <h2 className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
               Services
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-silver">
@@ -70,7 +82,7 @@ export function Footer() {
                 <li key={service.id}>
                   <Link
                     href={`/services/${service.id}`}
-                    className="hover:text-gold-bright"
+                    className="hover:text-gold-bright transition-colors"
                   >
                     {service.title}
                   </Link>
@@ -80,51 +92,53 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h2 className="text-xs uppercase tracking-[0.2em] text-ivory">
-              Contact
+            <h2 className="text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+              International Terminals
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-silver">
               <li>
-                <span className="block text-xs uppercase tracking-[0.14em] text-ivory/70">
-                  Nigeria
+                <span className="block text-xs uppercase tracking-[0.14em] text-gold-bright">
+                  Nigeria (Lagos Headquarters)
                 </span>
                 <a
                   href={company.phones.nigeria.href}
-                  className="safe-break hover:text-gold-bright"
+                  className="safe-break hover:text-gold-bright font-mono text-xs"
                 >
                   {company.phones.nigeria.display}
                 </a>
+                <p className="text-[0.75rem] text-silver/70 mt-0.5 leading-snug">
+                  {company.address.line1}, {company.address.line2}, {company.address.city}
+                </p>
               </li>
-              <li>
-                <span className="block text-xs uppercase tracking-[0.14em] text-ivory/70">
-                  South Africa
+              <li className="pt-2 border-t border-white/5">
+                <span className="block text-xs uppercase tracking-[0.14em] text-gold-bright">
+                  South Africa (Sandton & Durban Hub)
                 </span>
                 <a
                   href={company.phones.southAfrica.href}
-                  className="safe-break hover:text-gold-bright"
+                  className="safe-break hover:text-gold-bright font-mono text-xs"
                 >
                   {company.phones.southAfrica.display}
                 </a>
               </li>
-              <li>
+              <li className="pt-2 border-t border-white/5">
                 <a
                   href={company.whatsapp.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-gold-bright"
+                  className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium text-xs"
                 >
-                  WhatsApp {company.whatsapp.display}
+                  <span>WhatsApp VIP Concierge →</span>
                 </a>
               </li>
               <li>
                 <a
                   href={`mailto:${company.email}`}
-                  className="safe-break hover:text-gold-bright"
+                  className="safe-break text-xs hover:text-gold-bright text-silver"
                 >
                   {company.email}
                 </a>
               </li>
-              <li className="safe-break leading-relaxed">{company.address.full}</li>
             </ul>
           </div>
         </div>

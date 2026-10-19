@@ -5,6 +5,11 @@ export const company = {
   domain: "shindaraautos.com",
   url: "https://shindaraautos.com",
   email: "hello@shindaraautos.com",
+  /** All form submissions (enquiry, contact, newsletter) deliver here */
+  inboxEmails: [
+    "hello@shindaraautos.com",
+    "oluwasina@shindaraautos.com",
+  ] as const,
   phones: {
     nigeria: {
       label: "Nigeria",

@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { company } from "@/data/company";
 import "./globals.css";
 
@@ -67,6 +68,21 @@ export const metadata: Metadata = {
   },
 };
 
+const themeInitScript = `
+(function(){
+  try {
+    var key = 'shindara-theme';
+    var stored = localStorage.getItem(key);
+    var theme = stored === 'light' || stored === 'dark'
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -90,19 +106,24 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className={`${syne.variable} ${manrope.variable} antialiased`}>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-obsidian"
-        >
-          Skip to content
-        </a>
-        <PageLoader />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <WhatsAppFab />
+        <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-obsidian"
+          >
+            Skip to content
+          </a>
+          <PageLoader />
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <WhatsAppFab />
+        </ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

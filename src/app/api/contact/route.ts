@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { mailUnavailableMessage, sendTransactionalMail } from "@/lib/mail";
+import {
+  buildBrandedEmailHtml,
+  mailUnavailableMessage,
+  sendTransactionalMail,
+} from "@/lib/mail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 import { contactSchema, isHoneypotTriggered } from "@/lib/validation";
 
@@ -47,6 +51,17 @@ export async function POST(request: Request) {
     const result = await sendTransactionalMail({
       subject: `Shindara contact — ${payload.enquiryType}`,
       text: textBody,
+      html: buildBrandedEmailHtml({
+        title: "New website contact",
+        intro: "A visitor submitted the contact form on shindaraautos.com.",
+        rows: [
+          { label: "Name", value: payload.name },
+          { label: "Email", value: payload.email },
+          { label: "Phone", value: payload.phone },
+          { label: "Type", value: payload.enquiryType },
+        ],
+        body: payload.message,
+      }),
       replyTo: payload.email,
       tags: ["contact"],
     });
@@ -64,7 +79,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "We could not deliver your enquiry right now. Please email hello@shindaraautos.com or call us.",
+            "We could not deliver your enquiry right now. Please email hello@shindaraautos.com or oluwasina@shindaraautos.com, or call us.",
         },
         { status: 502 },
       );
