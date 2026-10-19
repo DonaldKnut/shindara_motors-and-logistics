@@ -6,27 +6,27 @@ import { img } from "@/data/media";
 export const heroSlides: SlideItem[] = [
   {
     src: img("lexus.jpg", "v1792400602"),
-    alt: "Lexus ES on the Shindara lot",
-    caption: "Lexus ES — executive saloon",
-    tag: "Automobile Sales",
+    alt: "Noir — Lexus ES on the Shindara lot",
+    caption: "Noir — Lexus ES 350",
+    tag: "Executive Saloon",
   },
   {
     src: img("prado.jpg", "v1792400606"),
-    alt: "Toyota Land Cruiser Prado front",
-    caption: "Land Cruiser Prado — prestige SUV",
-    tag: "Curated Fleet",
+    alt: "Monarch — Toyota Land Cruiser Prado",
+    caption: "Monarch — Land Cruiser Prado",
+    tag: "Prestige SUV",
   },
   {
     src: img("mercedes.jpg", "v1792400602"),
-    alt: "Mercedes-Benz GLA three-quarter",
-    caption: "Mercedes-Benz GLA",
-    tag: "Crossovers",
+    alt: "Solstice — Mercedes-Benz GLA",
+    caption: "Solstice — Mercedes-Benz GLA",
+    tag: "Crossover",
   },
   {
     src: img("bmw.jpg", "v1792400600"),
-    alt: "BMW X1 front grille",
-    caption: "BMW X1 xDrive",
-    tag: "Premium Imports",
+    alt: "Argent — BMW X1",
+    caption: "Argent — BMW X1 xDrive",
+    tag: "Premium Import",
   },
 ];
 
@@ -35,8 +35,8 @@ export const fleetGallerySlides: SlideItem[] = vehicles.flatMap((vehicle) =>
   vehicle.gallery.slice(0, 2).map((frame, index) => ({
     src: frame.src,
     alt: frame.alt,
-    caption: `${vehicle.make} ${vehicle.model}`,
-    tag: index === 0 ? vehicle.category : "Gallery",
+    caption: `${vehicle.name} — ${vehicle.make} ${vehicle.model}`,
+    tag: index === 0 ? vehicle.category : vehicle.name,
   })),
 );
 

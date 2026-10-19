@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Syne } from "next/font/google";
+import { Instrument_Serif, Outfit } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PageLoader } from "@/components/layout/PageLoader";
@@ -8,18 +8,19 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { company } from "@/data/company";
 import "./globals.css";
 
-const syne = Syne({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-instrument",
   display: "swap",
-  weight: ["500", "600", "700", "800"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-outfit",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || company.url;
@@ -110,7 +111,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${syne.variable} ${manrope.variable} antialiased`}>
+      <body className={`${instrumentSerif.variable} ${outfit.variable} antialiased`}>
         <ThemeProvider>
           <a
             href="#main-content"

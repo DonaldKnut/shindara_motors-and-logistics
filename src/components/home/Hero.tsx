@@ -153,7 +153,7 @@ export function Hero() {
           </motion.p>
 
           <motion.h1
-            className={`display-title text-balance text-[clamp(1.85rem,7.2vw,5.2rem)] font-extrabold tracking-tight ${
+            className={`display-title text-balance text-[clamp(1.85rem,7.2vw,5.2rem)] tracking-tight ${
               isLight ? "text-[#121417]" : "text-[#f6f3ec]"
             }`}
             initial={reduceMotion ? false : { opacity: 0, y: 22 }}

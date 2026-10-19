@@ -176,7 +176,10 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                         {vehicle.priceLabel}
                       </span>
                     </div>
-                    <h3 className="display-title mt-1 text-xl text-ivory transition-colors group-hover:text-gold-bright">
+                    <p className="mt-1 text-[0.65rem] uppercase tracking-[0.2em] text-gold">
+                      {vehicle.name}
+                    </p>
+                    <h3 className="display-title mt-0.5 text-xl text-ivory transition-colors group-hover:text-gold-bright">
                       {vehicle.make} {vehicle.model}
                     </h3>
                     <p className="mt-0.5 text-xs text-silver/80">{vehicle.color}</p>
@@ -296,7 +299,9 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                     {galleryVehicle.category}
                   </p>
                   <h3 className="display-title text-lg text-ivory sm:text-xl">
-                    {vehicleLabel(galleryVehicle)}
+                    <span className="text-gold">{galleryVehicle.name}</span>
+                    <span className="mx-2 text-silver/40">·</span>
+                    {galleryVehicle.make} {galleryVehicle.model}
                   </h3>
                 </div>
                 <button

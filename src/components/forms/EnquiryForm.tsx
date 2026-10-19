@@ -285,7 +285,7 @@ export function EnquiryForm() {
               const label = vehicleLabel(v);
               return (
                 <option key={v.id} value={label} className="bg-obsidian">
-                  {label} — {v.color}
+                  {v.name} — {v.make} {v.model} ({v.color})
                 </option>
               );
             })}

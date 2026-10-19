@@ -4,18 +4,18 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronDown, Phone } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { Button } from "@/components/ui/Button";
-import { NavIcon, ServiceIcon } from "@/components/ui/Icons";
+import { NavIcon } from "@/components/ui/Icons";
 import { company, navLinks } from "@/data/company";
 import { services } from "@/data/services";
-import { vehicles } from "@/data/vehicles";
+import { vehicles, vehicleLabel } from "@/data/vehicles";
 import { easeOut } from "@/lib/motion";
 
-const megaSpotlight = vehicles[0];
+const featured = vehicles[0];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -96,12 +96,12 @@ export function Header() {
         }`}
       >
         <p className="flex flex-wrap items-center justify-center gap-2 text-[0.66rem] uppercase tracking-[0.18em] text-silver">
-          <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
           <span className="max-w-full safe-break">
-            Bi-Continental Corridors Active: Nigeria · South Africa · London · Dubai
+            Nigeria · South Africa · London · Dubai
           </span>
           <span className="font-medium text-gold">
-            VIP Concierge: {company.phones.nigeria.display}
+            {company.phones.nigeria.display}
           </span>
         </p>
       </div>
@@ -119,7 +119,7 @@ export function Header() {
                 key={link.href}
                 ref={servicesBtnRef}
                 type="button"
-                className="inline-flex items-center gap-1.5 px-2.5 py-2 text-[0.72rem] uppercase tracking-[0.18em] font-medium text-ivory/90 transition-colors hover:text-gold-bright xl:px-3 xl:text-[0.74rem]"
+                className="inline-flex items-center gap-1.5 px-2.5 py-2 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ivory/90 transition-colors hover:text-gold-bright xl:px-3"
                 aria-expanded={megaOpen}
                 aria-haspopup="true"
                 onClick={() => setMegaOpen((value) => !value)}
@@ -137,7 +137,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="inline-flex items-center px-2.5 py-2 text-[0.72rem] uppercase tracking-[0.18em] font-medium text-ivory/90 transition-colors hover:text-gold-bright xl:px-3 xl:text-[0.74rem]"
+                className="inline-flex items-center px-2.5 py-2 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ivory/90 transition-colors hover:text-gold-bright xl:px-3"
               >
                 {link.label}
               </Link>
@@ -181,132 +181,108 @@ export function Header() {
         </div>
       </div>
 
-      {/* Full-bleed mega panel — anchored to header, never clipped to nav item */}
+      {/* Compact mega — services list + one featured unit */}
       <AnimatePresence>
         {megaOpen ? (
           <motion.div
             ref={megaRef}
-            initial={reduceMotion ? false : { opacity: 0, y: -8 }}
+            initial={reduceMotion ? false : { opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
-            transition={{ duration: 0.28, ease: easeOut }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -4 }}
+            transition={{ duration: 0.22, ease: easeOut }}
             className={`absolute inset-x-0 top-full z-50 border-b shadow-2xl backdrop-blur-2xl ${
               isLight
                 ? "border-[var(--color-border)] bg-white/98"
-                : "border-gold/25 bg-charcoal/98"
+                : "border-gold/20 bg-charcoal/98"
             }`}
             onMouseLeave={() => setMegaOpen(false)}
           >
-            <div className="container-shell max-h-[min(72vh,42rem)] overflow-y-auto py-5 sm:py-6 lg:py-7">
-              <div className="mb-4 flex flex-col gap-3 border-b border-[var(--color-border)] pb-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
-                <div className="min-w-0">
-                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-gold">
-                    Services & Global Corridors
-                  </p>
-                  <p className="mt-1 max-w-2xl text-sm text-silver">
-                    Explore how Shindara engineers end-to-end automotive sourcing and
-                    trans-continental logistics.
-                  </p>
+            <div className="container-shell py-5 sm:py-6">
+              <div className="grid gap-6 lg:grid-cols-[1fr_15rem] lg:items-start lg:gap-10">
+                <div>
+                  <div className="mb-3 flex items-baseline justify-between gap-3">
+                    <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-gold">
+                      Services
+                    </p>
+                    <Link
+                      href="/services"
+                      onClick={closeAll}
+                      className="text-[0.65rem] uppercase tracking-[0.16em] text-silver transition-colors hover:text-gold"
+                    >
+                      All →
+                    </Link>
+                  </div>
+                  <ul className="grid gap-0 sm:grid-cols-2 sm:gap-x-8">
+                    {services.map((service) => (
+                      <li key={service.id} className="border-b border-[var(--color-border)]">
+                        <Link
+                          href={`/services/${service.id}`}
+                          onClick={closeAll}
+                          className="group flex items-center justify-between gap-3 py-3 transition-colors"
+                        >
+                          <span className="display-title text-[1.05rem] font-normal tracking-tight text-ivory transition-colors group-hover:text-gold-bright sm:text-[1.1rem]">
+                            {service.title}
+                          </span>
+                          <ArrowUpRight
+                            className="h-3.5 w-3.5 shrink-0 text-gold/50 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+
                 <Link
-                  href="/services"
+                  href={`/enquire?type=Automobile%20Sales&vehicleId=${featured.id}`}
                   onClick={closeAll}
-                  className="inline-flex shrink-0 items-center gap-1.5 rounded border border-gold/30 px-3 py-1.5 text-xs uppercase tracking-[0.16em] text-gold transition-colors hover:border-gold-bright hover:text-gold-bright"
+                  className="group relative hidden overflow-hidden border border-gold/30 lg:block"
                 >
-                  View All Services →
+                  <div className="relative aspect-[4/5] w-full">
+                    <Image
+                      src={featured.image.src}
+                      alt={featured.image.alt}
+                      fill
+                      sizes="240px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-3.5">
+                      <p className="text-[0.58rem] uppercase tracking-[0.2em] text-gold">
+                        Featured · {featured.name}
+                      </p>
+                      <p className="mt-1 text-sm text-ivory">
+                        {featured.make} {featured.model}
+                      </p>
+                      <p className="mt-2 text-[0.65rem] uppercase tracking-[0.14em] text-gold-bright">
+                        Enquire →
+                      </p>
+                    </div>
+                  </div>
                 </Link>
               </div>
 
-              <div className="grid items-stretch gap-4 lg:grid-cols-12 lg:gap-6">
-                <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3 lg:col-span-8">
-                  {services.map((service, index) => (
-                    <Link
-                      key={service.id}
-                      href={`/services/${service.id}`}
-                      onClick={closeAll}
-                      className={`group flex min-w-0 gap-3 rounded-lg border p-3 transition-all duration-300 ${
-                        isLight
-                          ? "border-[var(--color-border)] bg-[#f4f5f7] hover:border-gold/50 hover:bg-white"
-                          : "border-white/8 bg-obsidian/70 hover:border-gold/50 hover:bg-obsidian"
-                      }`}
-                    >
-                      <div className="relative h-14 w-16 shrink-0 overflow-hidden rounded sm:h-16 sm:w-20">
-                        <Image
-                          src={service.image.src}
-                          alt=""
-                          fill
-                          sizes="80px"
-                          className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <span className="absolute bottom-1 left-1 font-mono text-[0.6rem] font-bold text-gold-bright">
-                          0{index + 1}
-                        </span>
-                      </div>
-                      <div className="min-w-0 flex flex-col justify-center">
-                        <div className="flex items-center gap-1.5 text-gold">
-                          <ServiceIcon id={service.id} className="h-3.5 w-3.5 shrink-0" />
-                          <h3 className="truncate text-xs font-semibold text-ivory transition-colors group-hover:text-gold sm:text-sm">
-                            {service.title}
-                          </h3>
-                        </div>
-                        <p className="mt-1 line-clamp-2 text-[0.72rem] leading-relaxed text-silver">
-                          {service.summary}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-
-                <div
-                  className={`relative flex flex-col justify-between overflow-hidden rounded-xl border border-gold/40 lg:col-span-4 ${
-                    isLight
-                      ? "bg-gradient-to-b from-white to-[#f4f5f7]"
-                      : "bg-gradient-to-b from-charcoal-light to-obsidian"
-                  }`}
-                >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden">
-                    <Image
-                      src={megaSpotlight.image.src}
-                      alt={megaSpotlight.image.alt}
-                      fill
-                      sizes="320px"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
-                    <span className="absolute left-3 top-3 rounded border border-gold/40 bg-obsidian/80 px-2 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-gold backdrop-blur-md">
-                      In stock
-                    </span>
-                  </div>
-                  <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
-                    <div>
-                      <p className="text-[0.62rem] uppercase tracking-[0.18em] text-gold">
-                        Live inventory
-                      </p>
-                      <h4 className="display-title mt-1 text-base font-bold leading-snug text-ivory">
-                        {megaSpotlight.make} {megaSpotlight.model}
-                      </h4>
-                      <p className="mt-2 text-[0.72rem] leading-relaxed text-silver">
-                        Browse the full fleet — Lexus, Prado, BMW, Mercedes, and more —
-                        then enquire. Every form reaches hello@ and oluwasina@shindaraautos.com.
-                      </p>
-                    </div>
-                    <div className="mt-4 space-y-2 border-t border-[var(--color-border)] pt-3">
-                      <Link
-                        href="/vehicles"
-                        onClick={closeAll}
-                        className="inline-flex w-full items-center justify-center gap-1.5 bg-gold px-3 py-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-obsidian transition-all hover:bg-gold-bright"
-                      >
-                        View fleet →
-                      </Link>
-                      <Link
-                        href={`/enquire?type=Automobile%20Sales&vehicleId=${megaSpotlight.id}`}
-                        onClick={closeAll}
-                        className="inline-flex w-full items-center justify-center gap-1.5 border border-[var(--color-border)] px-3 py-1.5 text-[0.65rem] uppercase tracking-wider text-ivory transition-colors hover:border-gold/40 hover:text-gold"
-                      >
-                        Enquire on this vehicle
-                      </Link>
-                    </div>
-                  </div>
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-border)] pt-4">
+                <p className="text-[0.7rem] text-silver">
+                  <span className="text-gold">{featured.name}</span>
+                  {" — "}
+                  {vehicleLabel(featured).replace(`${featured.name} · `, "")}
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/vehicles"
+                    onClick={closeAll}
+                    className="text-[0.65rem] uppercase tracking-[0.16em] text-ivory transition-colors hover:text-gold"
+                  >
+                    Fleet
+                  </Link>
+                  <Link
+                    href="/enquire"
+                    onClick={closeAll}
+                    className="text-[0.65rem] uppercase tracking-[0.16em] text-gold transition-colors hover:text-gold-bright"
+                  >
+                    Enquire
+                  </Link>
                 </div>
               </div>
             </div>
@@ -326,10 +302,10 @@ export function Header() {
             initial={reduceMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={reduceMotion ? undefined : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: easeOut }}
+            transition={{ duration: 0.3, ease: easeOut }}
           >
             <nav
-              className="container-shell flex max-h-[calc(100dvh-4.25rem)] flex-col gap-1 overflow-y-auto py-6"
+              className="container-shell flex max-h-[calc(100dvh-4.25rem)] flex-col gap-0.5 overflow-y-auto py-5"
               aria-label="Mobile"
             >
               {navLinks.map((link) =>
@@ -337,12 +313,12 @@ export function Header() {
                   <div key={link.href} className="border-b border-[var(--color-border)]">
                     <button
                       type="button"
-                      className="flex w-full items-center justify-between py-4 text-left text-sm uppercase tracking-[0.18em] text-ivory"
+                      className="flex w-full items-center justify-between py-3.5 text-left text-[0.75rem] uppercase tracking-[0.18em] text-ivory"
                       aria-expanded={mobileMegaOpen}
                       onClick={() => setMobileMegaOpen((value) => !value)}
                     >
                       <span className="inline-flex items-center gap-3">
-                        <span className="inline-flex h-9 w-9 items-center justify-center border border-gold/30 text-gold">
+                        <span className="inline-flex h-8 w-8 items-center justify-center border border-gold/30 text-gold">
                           <NavIcon name={link.icon} />
                         </span>
                         {link.label}
@@ -360,38 +336,17 @@ export function Header() {
                           initial={reduceMotion ? false : { height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
-                          className="overflow-hidden pb-4"
+                          className="overflow-hidden pb-3"
                         >
-                          <Link
-                            href="/services"
-                            onClick={closeAll}
-                            className="mb-3 block text-xs uppercase tracking-[0.16em] text-gold"
-                          >
-                            All services →
-                          </Link>
-                          <div className="grid gap-2">
+                          <div className="flex flex-col">
                             {services.map((service) => (
                               <Link
                                 key={service.id}
                                 href={`/services/${service.id}`}
                                 onClick={closeAll}
-                                className={`flex items-start gap-3 border p-3 ${
-                                  isLight
-                                    ? "border-[var(--color-border)] bg-[#f4f5f7]"
-                                    : "border-white/8 bg-charcoal/60"
-                                }`}
+                                className="border-b border-[var(--color-border)] py-2.5 pl-11 text-sm text-silver transition-colors hover:text-gold"
                               >
-                                <span className="mt-0.5 text-gold">
-                                  <ServiceIcon id={service.id} className="h-4 w-4" />
-                                </span>
-                                <span>
-                                  <span className="block text-sm text-ivory">
-                                    {service.title}
-                                  </span>
-                                  <span className="mt-1 block text-xs leading-relaxed text-silver">
-                                    {service.summary}
-                                  </span>
-                                </span>
+                                {service.title}
                               </Link>
                             ))}
                           </div>
@@ -403,24 +358,17 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-3 border-b border-[var(--color-border)] py-4 text-sm uppercase tracking-[0.18em] text-ivory"
+                    className="flex items-center gap-3 border-b border-[var(--color-border)] py-3.5 text-[0.75rem] uppercase tracking-[0.18em] text-ivory"
                     onClick={closeAll}
                   >
-                    <span className="inline-flex h-9 w-9 items-center justify-center border border-gold/30 text-gold">
+                    <span className="inline-flex h-8 w-8 items-center justify-center border border-gold/30 text-gold">
                       <NavIcon name={link.icon} />
                     </span>
-                    <span>
-                      <span className="block">{link.label}</span>
-                      {link.description ? (
-                        <span className="mt-1 block text-[0.7rem] normal-case tracking-normal text-silver">
-                          {link.description}
-                        </span>
-                      ) : null}
-                    </span>
+                    {link.label}
                   </Link>
                 ),
               )}
-              <div className="mt-6 flex flex-col gap-3">
+              <div className="mt-5 flex flex-col gap-3">
                 <Button href="/enquire" onClick={closeAll} showArrow>
                   Start an Enquiry
                 </Button>

@@ -11,6 +11,8 @@ export type VehicleCategory =
 
 export type Vehicle = {
   id: string;
+  /** Curated unit name shown on cards & enquiries */
+  name: string;
   make: string;
   model: string;
   year: number;
@@ -208,6 +210,7 @@ const camryGallery = [
 export const vehicles: Vehicle[] = [
   {
     id: "lexus-es-350",
+    name: "Noir",
     make: "Lexus",
     model: "ES 350",
     year: 2019,
@@ -232,6 +235,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "toyota-land-cruiser-prado",
+    name: "Monarch",
     make: "Toyota",
     model: "Land Cruiser Prado",
     year: 2021,
@@ -256,6 +260,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "bmw-x1-xdrive",
+    name: "Argent",
     make: "BMW",
     model: "X1 xDrive",
     year: 2020,
@@ -280,6 +285,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "mercedes-gla",
+    name: "Solstice",
     make: "Mercedes-Benz",
     model: "GLA",
     year: 2020,
@@ -304,6 +310,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "toyota-highlander",
+    name: "Atlas",
     make: "Toyota",
     model: "Highlander",
     year: 2013,
@@ -328,6 +335,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "toyota-rav4",
+    name: "Ember",
     make: "Toyota",
     model: "RAV4",
     year: 2008,
@@ -347,6 +355,7 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "toyota-camry-se",
+    name: "Scarlet",
     make: "Toyota",
     model: "Camry SE",
     year: 2015,
@@ -378,5 +387,9 @@ export function getVehicleById(id: string) {
 }
 
 export function vehicleLabel(vehicle: Vehicle) {
+  return `${vehicle.name} · ${vehicle.year} ${vehicle.make} ${vehicle.model}`;
+}
+
+export function vehicleSpecLabel(vehicle: Vehicle) {
   return `${vehicle.year} ${vehicle.make} ${vehicle.model}`;
 }
