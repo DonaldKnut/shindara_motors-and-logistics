@@ -69,8 +69,8 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
         <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             eyebrow="Live Inventory"
-            title="Vehicles ready for enquiry and dispatch."
-            description="Real photography from the Shindara lot. Filter by category, open the gallery, then enquire — our team receives every request at hello@ and oluwasina@shindaraautos.com."
+            title="Cars available to enquire about."
+            description="Real photos from our inventory. Open a gallery, then enquire — messages go to hello@ and oluwasina@shindaraautos.com."
           />
           <Button href="/vehicles" variant="secondary" className="self-start shrink-0 lg:self-auto">
             View Complete Fleet
@@ -239,10 +239,10 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                       Open photo gallery
                     </button>
                     <Link
-                      href={`/enquire?type=Automobile%20Sales&vehicle=${encodeURIComponent(label)}&vehicleId=${vehicle.id}`}
+                      href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(label)}&vehicleId=${vehicle.id}`}
                       className="group/btn inline-flex w-full items-center justify-center gap-2 rounded border border-gold/40 bg-charcoal-light px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-gold-bright transition-all hover:bg-gold hover:text-obsidian"
                     >
-                      <span>Acquire / Enquire</span>
+                      <span>Enquire</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
                     </Link>
                     <a
@@ -252,7 +252,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                       className="inline-flex w-full items-center justify-center gap-2 rounded border border-emerald-600/30 bg-emerald-950/40 px-3 py-2 text-xs tracking-wider text-emerald-300 transition-all hover:bg-emerald-900/60"
                     >
                       <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
-                      WhatsApp VIP Concierge
+                      WhatsApp us
                     </a>
                   </div>
                 </div>
@@ -332,7 +332,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                   {galleryVehicle.status}
                 </p>
                 <Link
-                  href={`/enquire?type=Automobile%20Sales&vehicle=${encodeURIComponent(vehicleLabel(galleryVehicle))}&vehicleId=${galleryVehicle.id}`}
+                  href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(vehicleLabel(galleryVehicle))}&vehicleId=${galleryVehicle.id}`}
                   className="inline-flex items-center justify-center gap-2 bg-gold px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-obsidian transition-opacity hover:opacity-90"
                   onClick={() => setGalleryVehicle(null)}
                 >

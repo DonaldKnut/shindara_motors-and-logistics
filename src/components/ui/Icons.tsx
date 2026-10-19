@@ -1,10 +1,9 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  Building2,
+  BookOpen,
   Car,
   ClipboardList,
   FileText,
-  Headset,
   Package,
   Phone,
   Route,
@@ -44,9 +43,9 @@ export function ServiceIcon({
   const map: Record<string, LucideIcon> = {
     "automobile-sales": Car,
     "vehicle-sourcing": Search,
-    "automotive-support": Headset,
+    "automotive-support": BookOpen,
     "logistics-solutions": Truck,
-    "business-transport": Building2,
+    "business-transport": Users,
   };
   const Icon = map[id] ?? Package;
   return <Icon className={className} aria-hidden="true" strokeWidth={1.75} />;

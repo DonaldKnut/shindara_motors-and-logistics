@@ -9,11 +9,36 @@ import { services } from "@/data/services";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const serviceCapabilities: Record<string, string[]> = {
-  "automobile-sales": ["Prestige Saloons & SUVs", "150-Point Technical Audit", "Title & Escrow Security", "Lagos Delivery"],
-  "vehicle-sourcing": ["UK, Europe & UAE Corridors", "Rare & Custom Specifications", "Pre-Purchase Inspection", "Direct Import Handling"],
-  "automotive-support": ["Fleet Maintenance Schedules", "OEM Genuine Spare Parts", "Dedicated Concierge", "Post-Acquisition Advisory"],
-  "logistics-solutions": ["Ocean Freight (RoRo & Container)", "Priority Air Cargo Express", "Port Customs Pre-Clearance", "Escorted Road Freight"],
-  "business-transport": ["Executive Corporate Mobility", "Diplomatic / Armoured Transport", "Scheduled Inter-State Transfers", "Fleet Optimization"],
+  "automobile-sales": [
+    "New & used vehicles",
+    "Luxury & premium cars",
+    "Import and export",
+    "Buy and sell support",
+  ],
+  "vehicle-sourcing": [
+    "Find your preferred make",
+    "Instalment payment plans",
+    "Clear pricing options",
+    "Guided purchase steps",
+  ],
+  "automotive-support": [
+    "Automotive education",
+    "Practical skills training",
+    "Private & group sessions",
+    "Clear learning outcomes",
+  ],
+  "business-transport": [
+    "Professional drivers",
+    "Private & business placement",
+    "Screened candidates",
+    "Ongoing coordination",
+  ],
+  "logistics-solutions": [
+    "Vehicle delivery",
+    "Fleet management",
+    "Related support services",
+    "Lawful, organised handling",
+  ],
 };
 
 export function Services() {
@@ -26,9 +51,9 @@ export function Services() {
 
       <div className="container-shell relative z-10">
         <SectionHeading
-          eyebrow="Capabilities & Disciplines"
-          title="Engineered for clarity. Executed without compromise."
-          description="Integrated automotive procurement and trans-continental logistics tailored for private high-net-worth clients, corporate fleets, and institutions."
+          eyebrow="Our services"
+          title="Cars, training, drivers, and support."
+          description="We buy and sell vehicles, help with instalment plans, train people, place professional drivers, and coordinate delivery and fleets — in plain language, within the law."
         />
 
         <motion.div

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PageLoader } from "@/components/layout/PageLoader";
@@ -8,19 +8,18 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { company } from "@/data/company";
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-instrument",
+  variable: "--font-sora",
   display: "swap",
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const outfit = Outfit({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-jakarta",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || company.url;
@@ -31,8 +30,7 @@ export const metadata: Metadata = {
     default: `${company.shortName} Motors & Logistics | ${company.tagline}`,
     template: `%s | ${company.shortName}`,
   },
-  description:
-    "Premium automotive solutions and dependable logistics from Shindara Motors & Logistics Limited — delivered with precision, integrity, and purpose.",
+  description: company.about,
   alternates: {
     canonical: "/",
   },
@@ -40,8 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     title: `${company.legalName} | ${company.tagline}`,
-    description:
-      "Premium automotive solutions and dependable logistics, delivered with precision, integrity, and purpose.",
+    description: company.focus,
     siteName: company.legalName,
     images: [
       {
@@ -55,8 +52,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${company.legalName}`,
-    description:
-      "Premium automotive solutions and dependable logistics. Driving value. Delivering more.",
+    description: company.focus,
     images: ["/brand/shindara-logo.png"],
   },
   icons: {
@@ -111,7 +107,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${instrumentSerif.variable} ${outfit.variable} antialiased`}>
+      <body className={`${sora.variable} ${plusJakarta.variable} antialiased`}>
         <ThemeProvider>
           <a
             href="#main-content"

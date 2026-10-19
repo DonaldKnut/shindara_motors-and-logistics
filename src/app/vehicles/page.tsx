@@ -5,7 +5,7 @@ import { VehicleShowcase } from "@/components/home/VehicleShowcase";
 export const metadata: Metadata = {
   title: "Vehicles",
   description:
-    "Explore the Shindara vehicle showcase and enquire about automotive options suited to your requirements.",
+    "Browse new and used vehicles for sale from Shindara — including luxury and premium cars — and send an enquiry.",
   alternates: { canonical: "/vehicles" },
 };
 

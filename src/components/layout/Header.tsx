@@ -98,7 +98,7 @@ export function Header() {
         <p className="flex flex-wrap items-center justify-center gap-2 text-[0.66rem] uppercase tracking-[0.18em] text-silver">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
           <span className="max-w-full safe-break">
-            Nigeria · South Africa · London · Dubai
+            Vehicle sales · Instalments · Training · Drivers · Fleet support
           </span>
           <span className="font-medium text-gold">
             {company.phones.nigeria.display}
@@ -106,7 +106,7 @@ export function Header() {
         </p>
       </div>
 
-      <div className="container-shell relative flex min-h-[4.25rem] items-center justify-between gap-2 py-2 sm:min-h-[4.75rem] sm:gap-3">
+      <div className="container-shell relative flex min-h-[4.75rem] items-center justify-between gap-2 py-2.5 sm:min-h-[5.25rem] sm:gap-3">
         <Logo priority compact />
 
         <nav
@@ -234,7 +234,7 @@ export function Header() {
                 </div>
 
                 <Link
-                  href={`/enquire?type=Automobile%20Sales&vehicleId=${featured.id}`}
+                  href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicleId=${featured.id}`}
                   onClick={closeAll}
                   className="group relative hidden overflow-hidden border border-gold/30 lg:block"
                 >

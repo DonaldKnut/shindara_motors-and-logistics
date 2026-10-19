@@ -12,9 +12,9 @@ export function HowItWorks() {
     <section id="process" className="section-pad bg-obsidian">
       <div className="container-shell">
         <SectionHeading
-          eyebrow="How It Works"
-          title="A clear path from enquiry to delivery."
-          description="A straightforward process designed to keep communication clear and progress confident at every stage."
+          eyebrow="Four steps"
+          title="Structured for transparency."
+          description="We keep each stage simple so you always know what happens next."
         />
 
         <motion.ol

@@ -104,14 +104,16 @@ export function GlobalNetwork() {
           <div>
             <div className="inline-flex items-center gap-2 text-gold text-xs uppercase tracking-[0.24em] mb-2 font-semibold">
               <Compass className="h-4 w-4" />
-              <span>Pan-African & Global Infrastructure</span>
+              <span>Where we work</span>
             </div>
             <h2 className="display-title text-[clamp(2rem,4vw,3.2rem)] text-ivory">
-              Strategic corridors. <span className="text-gold-gradient">Seamless delivery.</span>
+              Lagos base.{" "}
+              <span className="text-gold-gradient">Wider reach when you need it.</span>
             </h2>
           </div>
           <p className="text-silver max-w-md text-sm leading-relaxed">
-            Connecting major procurement epicenters across Africa, the Middle East, and Europe into an integrated logistics network.
+            We operate from Lagos with a South Africa line, and can support import,
+            export, and delivery across connected markets — subject to applicable laws.
           </p>
         </div>
 

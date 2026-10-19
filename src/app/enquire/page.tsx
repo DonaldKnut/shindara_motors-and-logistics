@@ -20,9 +20,9 @@ import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "VIP Business Enquiry & Procurement Concierge",
+  title: "Enquire",
   description:
-    "Submit a confidential automotive acquisition, cross-border freight, or corporate fleet logistics enquiry to Shindara Motors & Logistics Limited.",
+    "Enquire about vehicle sales, import or export, instalment plans, automotive training, driver placement, or fleet support with Shindara.",
   alternates: { canonical: "/enquire" },
 };
 
@@ -39,31 +39,31 @@ export default function EnquirePage() {
         <div className="container-shell">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/40 bg-charcoal/80 text-gold text-xs uppercase tracking-[0.2em] mb-4">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-charcoal/80 px-3 py-1 text-xs uppercase tracking-[0.2em] text-gold">
                 <Sparkles className="h-3.5 w-3.5" />
-                <span>Executive Concierge & Business Engagements</span>
+                <span>We are ready to help</span>
               </div>
               <h1 className="display-title text-[clamp(2.3rem,5.5vw,4.2rem)] text-ivory">
-                Start your <span className="text-gold-gradient">procurement or logistics</span> briefing.
+                Tell us what you need.{" "}
+                <span className="text-gold-gradient">We will reply clearly.</span>
               </h1>
-              <p className="mt-4 text-base sm:text-lg text-silver leading-relaxed">
-                Whether you require bespoke international vehicle sourcing, specialized cross-border freight, or corporate mobility management — our executive desk responds with discretion, exact pricing, and comprehensive execution protocols.
+              <p className="mt-4 text-base leading-relaxed text-silver sm:text-lg">
+                Buy or sell a car, import or export, pay in instalments, book
+                training, hire a driver, or ask about delivery and fleet support.
+                Your message goes to hello@ and oluwasina@shindaraautos.com.
               </p>
             </div>
 
-            {/* Quick Live Status Pill */}
-            <div className="bg-charcoal/90 border border-gold/30 rounded-xl p-4 sm:p-5 flex items-center gap-4 shrink-0 shadow-lg">
+            <div className="flex shrink-0 items-center gap-4 rounded-xl border border-gold/30 bg-charcoal/90 p-4 shadow-lg sm:p-5">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
               </span>
               <div>
-                <span className="text-xs uppercase tracking-[0.16em] text-gold-bright font-semibold block">
-                  Active Dispatch Status
+                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-gold-bright">
+                  Enquiries open
                 </span>
-                <span className="text-xs text-silver">
-                  Lagos &bull; Johannesburg &bull; London &bull; Dubai
-                </span>
+                <span className="text-xs text-silver">Lagos · South Africa</span>
               </div>
             </div>
           </div>

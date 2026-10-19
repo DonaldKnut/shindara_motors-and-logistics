@@ -91,13 +91,15 @@ export function ConciergeEstimator() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/30 bg-obsidian/60 text-gold text-[0.7rem] uppercase tracking-[0.2em] mb-4">
             <Calculator className="h-3.5 w-3.5" />
-            <span>Interactive Logistics Concierge</span>
+            <span>Quick planning guide</span>
           </div>
           <h2 className="display-title text-[clamp(1.9rem,4.5vw,3.4rem)] text-ivory">
-            Calculate your <span className="text-gold-gradient">procurement & freight timeline</span>.
+            Estimate your{" "}
+            <span className="text-gold-gradient">import or delivery timeline</span>.
           </h2>
-          <p className="mt-4 text-silver text-sm sm:text-base leading-relaxed">
-            Select your corridor and requirement to view transit specs, customs protocol, and receive priority concierge quotation.
+          <p className="mt-4 text-sm leading-relaxed text-silver sm:text-base">
+            Choose what you need and a route to see a simple timing guide — then
+            send an enquiry for a clear quote.
           </p>
         </div>
 
@@ -115,10 +117,10 @@ export function ConciergeEstimator() {
                 </label>
                 <div className="grid grid-cols-2 gap-2.5">
                   {[
-                    { id: "sourcing", label: "Vehicle Sourcing & Acquisition" },
-                    { id: "freight", label: "Cross-Border Freight" },
-                    { id: "armoured", label: "Diplomatic / Armoured Transport" },
-                    { id: "fleet", label: "Commercial Fleet Logistics" },
+                    { id: "sourcing", label: "Buy / source a vehicle" },
+                    { id: "freight", label: "Import or export" },
+                    { id: "armoured", label: "Driver placement" },
+                    { id: "fleet", label: "Delivery & fleet support" },
                   ].map((s) => (
                     <button
                       key={s.id}

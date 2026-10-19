@@ -38,11 +38,11 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   const enquiryTypeMap: Record<string, string> = {
-    "automobile-sales": "Automobile Sales",
-    "vehicle-sourcing": "Vehicle Sourcing",
-    "automotive-support": "Automotive Support",
-    "logistics-solutions": "Logistics Solutions",
-    "business-transport": "Business Transport",
+    "automobile-sales": "Vehicle Sales (New & Used)",
+    "vehicle-sourcing": "Sourcing & Instalment Plans",
+    "automotive-support": "Automotive Training",
+    "business-transport": "Driver Placement",
+    "logistics-solutions": "Delivery & Fleet Support",
   };
 
   return (
@@ -77,10 +77,10 @@ export default async function ServiceDetailPage({
                 )}`}
                 showArrow
               >
-                Start Enquiry
+                Enquire about this
               </Button>
               <Button href="/contact" variant="secondary" showArrow>
-                Contact Team
+                Contact us
               </Button>
             </div>
           </div>

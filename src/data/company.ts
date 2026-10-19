@@ -10,6 +10,11 @@ export const company = {
     "hello@shindaraautos.com",
     "oluwasina@shindaraautos.com",
   ] as const,
+  /** Plain-language overview of what the business does */
+  about:
+    "We import, export, buy, and sell new and used motor vehicles — including luxury and premium cars. We also source vehicles, offer instalment payment plans, provide automotive training, place professional drivers, and support clients with vehicle delivery and fleet management, in line with applicable laws.",
+  focus:
+    "Cars, training, drivers, and practical vehicle support — made simple.",
   phones: {
     nigeria: {
       label: "Nigeria",
@@ -40,11 +45,12 @@ export const company = {
 } as const;
 
 export const enquiryTypes = [
-  "Automobile Sales",
-  "Vehicle Sourcing",
-  "Automotive Support",
-  "Logistics Solutions",
-  "Business Transport",
+  "Vehicle Sales (New & Used)",
+  "Import / Export",
+  "Sourcing & Instalment Plans",
+  "Automotive Training",
+  "Driver Placement",
+  "Delivery & Fleet Support",
   "General Enquiry",
 ] as const;
 
@@ -67,38 +73,38 @@ export const navLinks: NavItem[] = [
   {
     href: "/services",
     label: "Services",
-    description: "Automotive and logistics solutions",
+    description: "Sales, training, drivers, and support",
     icon: "services",
     mega: true,
   },
   {
     href: "/vehicles",
     label: "Vehicles",
-    description: "Browse the showcase and enquire",
+    description: "Browse cars for sale",
     icon: "vehicles",
   },
   {
     href: "/process",
     label: "Process",
-    description: "How engagements move forward",
+    description: "How we work with you",
     icon: "process",
   },
   {
     href: "/about",
     label: "About",
-    description: "Purpose, values, and approach",
+    description: "Who we are",
     icon: "about",
   },
   {
     href: "/enquire",
     label: "Enquire",
-    description: "Start a detailed business enquiry",
+    description: "Send us your request",
     icon: "enquire",
   },
   {
     href: "/contact",
     label: "Contact",
-    description: "Call, email, or message the team",
+    description: "Call, email, or WhatsApp",
     icon: "contact",
   },
 ];

@@ -45,7 +45,7 @@ export function EnquiryForm() {
       type && enquiryTypes.includes(type as (typeof enquiryTypes)[number])
         ? (type as (typeof enquiryTypes)[number])
         : vehicle
-          ? "Automobile Sales"
+          ? "Vehicle Sales (New & Used)"
           : "General Enquiry";
 
     return {
@@ -270,7 +270,7 @@ export function EnquiryForm() {
               setForm((p) => ({
                 ...p,
                 vehicleInterest: value,
-                enquiryType: value ? "Automobile Sales" : p.enquiryType,
+                enquiryType: value ? "Vehicle Sales (New & Used)" : p.enquiryType,
                 message:
                   value && !p.message.trim()
                     ? `I would like to enquire about: ${value}\n\n`

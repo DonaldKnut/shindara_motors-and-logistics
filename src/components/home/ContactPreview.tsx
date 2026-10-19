@@ -24,8 +24,8 @@ export function ContactPreview() {
             Start a conversation.
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-silver sm:text-base">
-            Whether you are sourcing a vehicle, arranging logistics, or exploring
-            business transport options, our team is ready to assist.
+            Looking to buy or sell a car, set up instalments, train, hire a
+            driver, or manage a fleet? Send a message — we will respond clearly.
           </p>
 
           <dl className="mt-8 space-y-5 text-sm">

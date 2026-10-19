@@ -68,8 +68,8 @@
   --color-silver: var(--shindara-silver);
   --color-silver-light: var(--shindara-silver-light);
   --color-white: var(--shindara-white);
-  --font-display: var(--font-instrument);
-  --font-body: var(--font-outfit);
+  --font-display: var(--font-sora);
+  --font-body: var(--font-jakarta);
 }
 
 @layer base {
@@ -228,17 +228,17 @@
   .eyebrow {
     font-family: var(--font-body), system-ui, sans-serif;
     font-size: clamp(0.62rem, 1.6vw, 0.78rem);
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--shindara-gold);
     font-weight: 600;
   }
 
   .display-title {
-    font-family: var(--font-display), Georgia, "Times New Roman", serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.12;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
@@ -306,5 +306,14 @@
     border: 1px solid var(--color-border);
     background: var(--color-charcoal);
     box-shadow: var(--shadow-soft);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 }

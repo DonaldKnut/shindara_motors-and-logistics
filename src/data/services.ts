@@ -13,75 +13,79 @@ export type Service = {
   enquireHref: string;
 };
 
+/**
+ * Services mirror the company’s registered scope of business,
+ * written in plain language.
+ */
 export const services: Service[] = [
   {
     id: "automobile-sales",
-    title: "Automobile Sales",
+    title: "Vehicle Sales",
     summary:
-      "Curated vehicle sourcing and sales solutions aligned to your requirements, budget, and timeline.",
+      "Buy and sell new and used cars, including luxury and premium models.",
     description:
-      "From private acquisitions to business fleet needs, we help you identify suitable vehicles and move from enquiry to ownership with clarity and care.",
+      "We help you purchase or sell motor vehicles — new or used. This includes everyday cars as well as luxury and premium brands. We handle local sales and can also support import and export, subject to applicable laws.",
     image: {
       src: img("lexus.jpg", "v1792400602"),
-      alt: "Lexus ES from the Shindara sales inventory",
+      alt: "Luxury sedan available for sale",
     },
     href: "/services/automobile-sales",
-    enquireHref: "/enquire?type=Automobile%20Sales",
+    enquireHref: "/enquire?type=Vehicle%20Sales%20(New%20%26%20Used)",
   },
   {
     id: "vehicle-sourcing",
-    title: "Vehicle Sourcing",
+    title: "Sourcing & Instalments",
     summary:
-      "Purpose-built sourcing for clients who need a specific make, model, specification, or market.",
+      "Find the right vehicle and buy on an instalment payment plan when it suits you.",
     description:
-      "Share your requirements and we coordinate the search, shortlist suitable options, and guide next steps with transparent communication throughout.",
+      "Tell us the make, model, or budget you need. We source suitable options and can arrange sales on instalment payment plans so you can own a vehicle with a payment structure that works for you.",
     image: {
       src: img("prado.jpg", "v1792400606"),
-      alt: "Toyota Land Cruiser Prado available for sourcing",
+      alt: "SUV available through sourcing and instalment sales",
     },
     href: "/services/vehicle-sourcing",
-    enquireHref: "/enquire?type=Vehicle%20Sourcing",
+    enquireHref: "/enquire?type=Sourcing%20%26%20Instalment%20Plans",
   },
   {
     id: "automotive-support",
-    title: "Automotive Support",
+    title: "Automotive Training",
     summary:
-      "Practical support around vehicle-related needs, coordinated with professionalism and attention to detail.",
+      "Practical automotive education and training for individuals and teams.",
     description:
-      "Whether you require guidance after purchase or assistance navigating related automotive needs, our team remains available with clear next steps.",
+      "We provide automotive education and training to help people learn vehicle-related skills with clear, practical teaching. Training can be tailored to private learners or organisational needs.",
     image: {
       src: img("erdftu.jpg", "v1792400601"),
-      alt: "Verified Lexus V6 engine bay inspection",
+      alt: "Automotive training and education",
     },
     href: "/services/automotive-support",
-    enquireHref: "/enquire?type=Automotive%20Support",
-  },
-  {
-    id: "logistics-solutions",
-    title: "Logistics Solutions",
-    summary:
-      "Dependable logistics coordination designed for careful handling, clear communication, and reliable delivery.",
-    description:
-      "We support transportation and logistics requirements with a focus on planning, accountability, and a premium client experience from start to finish.",
-    image: {
-      src: img("tototot.jpg", "v1792400607"),
-      alt: "Land Cruiser Prado ready for logistics dispatch",
-    },
-    href: "/services/logistics-solutions",
-    enquireHref: "/enquire?type=Logistics%20Solutions",
+    enquireHref: "/enquire?type=Automotive%20Training",
   },
   {
     id: "business-transport",
-    title: "Business Transport Solutions",
+    title: "Driver Placement",
     summary:
-      "Transport arrangements tailored for organisations that value punctuality, discretion, and operational clarity.",
+      "Recruitment and placement of professional drivers for private and business use.",
     description:
-      "From scheduled movements to specialised transport needs, we work with businesses to structure reliable, professional transport solutions.",
+      "Need a reliable professional driver? We recruit and place drivers who meet your standards — for individuals, families, and organisations — with a focus on safety, professionalism, and clear communication.",
     image: {
       src: img("mercedes.jpg", "v1792400602"),
-      alt: "Mercedes-Benz GLA for executive transport",
+      alt: "Professional driver and vehicle support",
     },
     href: "/services/business-transport",
-    enquireHref: "/enquire?type=Business%20Transport",
+    enquireHref: "/enquire?type=Driver%20Placement",
+  },
+  {
+    id: "logistics-solutions",
+    title: "Delivery & Fleet Support",
+    summary:
+      "Vehicle delivery coordination, fleet management, and related support services.",
+    description:
+      "We coordinate vehicle delivery and help manage fleets. Our support covers practical vehicle-related needs so your cars stay organised, on schedule, and properly looked after — always within applicable laws.",
+    image: {
+      src: img("tototot.jpg", "v1792400607"),
+      alt: "Vehicle delivery and fleet coordination",
+    },
+    href: "/services/logistics-solutions",
+    enquireHref: "/enquire?type=Delivery%20%26%20Fleet%20Support",
   },
 ];

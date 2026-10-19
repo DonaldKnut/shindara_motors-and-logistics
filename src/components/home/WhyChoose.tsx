@@ -12,9 +12,9 @@ export function WhyChoose() {
     <section id="why-shindara" className="section-pad bg-obsidian">
       <div className="container-shell">
         <SectionHeading
-          eyebrow="Why Choose Shindara"
-          title="Built on trust. Measured by how we deliver."
-          description="We focus on the fundamentals that matter in premium automotive and logistics engagements — reliability, clarity, and careful execution."
+          eyebrow="Why Shindara"
+          title="Easy to understand. Careful to deliver."
+          description="We keep promises clear, language simple, and every service within applicable laws."
         />
 
         <motion.ul

@@ -1,59 +1,59 @@
 export const values = [
   {
-    title: "Reliability",
+    title: "Clear and honest",
     description:
-      "Clear commitments, careful coordination, and follow-through you can depend on.",
+      "We explain options, prices, and next steps in plain language — no confusion.",
   },
   {
-    title: "Professional Service",
+    title: "Reliable delivery",
     description:
-      "Discreet, respectful engagement designed for private clients and business partners alike.",
+      "When we agree on a plan, we follow through carefully from start to finish.",
   },
   {
-    title: "Transparency",
+    title: "Customer first",
     description:
-      "Straightforward communication on options, timelines, and next steps—without unnecessary complexity.",
+      "Your budget, timeline, and needs guide every recommendation we make.",
   },
   {
-    title: "Customer Focus",
+    title: "Professional care",
     description:
-      "Solutions shaped around your requirements, priorities, and operating context.",
+      "Whether you are buying a car, training, or hiring a driver, we treat every request with respect.",
   },
   {
-    title: "Attention to Detail",
+    title: "Lawful practice",
     description:
-      "From enquiry through delivery, every stage is handled with precision and care.",
+      "All import, export, sales, and support services are handled subject to applicable laws.",
   },
   {
-    title: "Efficient Coordination",
+    title: "Practical help",
     description:
-      "Organised processes that keep momentum high while protecting quality at every checkpoint.",
+      "From instalment plans to fleet support, we focus on solutions that work in real life.",
   },
 ] as const;
 
 export const processSteps = [
   {
     number: "01",
-    title: "Tell Us What You Need",
+    title: "Tell us what you need",
     description:
-      "Share your vehicle, logistics, or transport requirements so we understand the outcome you want.",
+      "Share whether you want to buy, sell, source a car, train, hire a driver, or get fleet support.",
   },
   {
     number: "02",
-    title: "Explore the Available Options",
+    title: "We review your options",
     description:
-      "We review suitable options and present clear recommendations aligned to your brief.",
+      "We check suitable vehicles, plans, or candidates and explain them in simple terms.",
   },
   {
     number: "03",
-    title: "Confirm the Details",
+    title: "Agree the details",
     description:
-      "Agree specifications, timing, and commercial details with full visibility before moving ahead.",
+      "Confirm price, payment plan, timing, and any paperwork before you move ahead.",
   },
   {
     number: "04",
-    title: "Move Forward With Confidence",
+    title: "We take care of the rest",
     description:
-      "We coordinate the next steps carefully so you can proceed with clarity and peace of mind.",
+      "We coordinate delivery, training, placement, or support so you can proceed with confidence.",
   },
 ] as const;

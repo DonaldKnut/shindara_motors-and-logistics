@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BrandStatement } from "@/components/home/BrandStatement";
+import { GlobalNetwork } from "@/components/home/GlobalNetwork";
+import { WhyChoose } from "@/components/home/WhyChoose";
 import { Button } from "@/components/ui/Button";
 import { values } from "@/data/values";
 import { company } from "@/data/company";
+import { img } from "@/data/media";
 
 export const metadata: Metadata = {
   title: "About",
-  description:
-    "Learn about Shindara Motors & Logistics Limited — a purpose-driven automotive and logistics partner built around trust, clarity, and professional delivery.",
+  description: company.about,
   alternates: { canonical: "/about" },
 };
 
@@ -17,30 +20,30 @@ export default function AboutPage() {
       <section className="section-pad">
         <div className="container-shell grid items-center gap-10 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <p className="eyebrow">About the Company</p>
+            <p className="eyebrow">About us</p>
             <h1 className="display-title mt-4 text-[clamp(2.1rem,5.5vw,4rem)] text-ivory">
-              Built around trust. Driven by purpose.
+              A motor company built on clear service.
             </h1>
             <p className="mt-6 text-base leading-relaxed text-silver">
-              {company.legalName} provides premium automotive solutions and
-              dependable logistics support for clients who value clarity,
-              professionalism, and careful execution.
+              {company.about}
             </p>
             <p className="mt-4 text-base leading-relaxed text-silver">
-              We approach every engagement with the same standard: understand the
-              requirement thoroughly, communicate with transparency, and deliver
-              with integrity. Our work spans vehicle-related needs and logistics
-              coordination for private clients and organisations.
+              Based in Lagos, with a South Africa line for clients who need
+              cross-border help. We keep communication simple and work within
+              applicable laws.
             </p>
-            <div className="mt-8">
-              <Button href="/contact">Contact Our Team</Button>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/contact">Contact us</Button>
+              <Button href="/services" variant="secondary">
+                See our services
+              </Button>
             </div>
           </div>
 
           <div className="relative min-h-[18rem] overflow-hidden sm:min-h-[24rem] lg:col-span-6">
             <Image
-              src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80"
-              alt="Precision automotive environment reflecting operational care"
+              src={img("lexus.jpg", "v1792400602")}
+              alt="Shindara vehicle for sale"
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover"
@@ -50,16 +53,19 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <BrandStatement />
+      <WhyChoose />
+      <GlobalNetwork />
+
       <section className="border-t border-white/5 section-pad bg-charcoal">
         <div className="container-shell">
-          <p className="eyebrow">Mission & Values</p>
+          <p className="eyebrow">How we work</p>
           <h2 className="display-title mt-4 max-w-3xl text-[clamp(1.8rem,4vw,3rem)] text-ivory">
-            How we work with clients.
+            Values you can feel in every enquiry.
           </h2>
           <p className="mt-5 max-w-2xl text-silver">
-            Our mission is to deliver automotive and logistics solutions that
-            feel considered, dependable, and professionally managed from first
-            enquiry through completion.
+            We aim to make buying, selling, training, and support feel
+            straightforward — from the first message to the final handover.
           </p>
 
           <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

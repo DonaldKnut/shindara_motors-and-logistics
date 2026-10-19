@@ -6,7 +6,7 @@ import { company } from "@/data/company";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact Shindara Motors & Logistics Limited in Lagos, Nigeria or South Africa. Call, email, or send an enquiry online.",
+    "Contact Shindara about vehicle sales, instalments, training, drivers, or fleet support. Call, email, or write online.",
   alternates: { canonical: "/contact" },
 };
 
