@@ -68,8 +68,9 @@
   --color-silver: var(--shindara-silver);
   --color-silver-light: var(--shindara-silver-light);
   --color-white: var(--shindara-white);
-  --font-display: var(--font-sora);
-  --font-body: var(--font-jakarta);
+  /* next/font vars live on <html> — include system fallbacks */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -117,7 +118,7 @@
   body {
     background-color: var(--shindara-obsidian);
     color: var(--shindara-ivory);
-    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-jakarta), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     min-width: 235px;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -226,7 +227,7 @@
   }
 
   .eyebrow {
-    font-family: var(--font-body), system-ui, sans-serif;
+    font-family: var(--font-jakarta), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-size: clamp(0.62rem, 1.6vw, 0.78rem);
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -235,7 +236,7 @@
   }
 
   .display-title {
-    font-family: var(--font-display), system-ui, sans-serif;
+    font-family: var(--font-sora), var(--font-display), ui-sans-serif, system-ui, sans-serif;
     font-weight: 600;
     letter-spacing: -0.035em;
     line-height: 1.08;

@@ -4,8 +4,10 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { BookOpen, Car, Truck, Users } from "lucide-react";
 import { company } from "@/data/company";
-import { img } from "@/data/media";
+import { namedAlt, vehicles } from "@/data/vehicles";
 import { easeOut, viewportOnce } from "@/lib/motion";
+
+const backdrop = vehicles[1];
 
 const pillars = [
   {
@@ -41,8 +43,8 @@ export function BrandStatement() {
     <section className="relative overflow-hidden py-[clamp(5rem,10vw,8rem)] bg-obsidian-deep">
       <div className="absolute inset-0">
         <Image
-          src={img("prado.jpg", "v1792400606")}
-          alt=""
+          src={backdrop.image.src}
+          alt={namedAlt(backdrop)}
           fill
           sizes="100vw"
           className="object-cover object-center opacity-20"

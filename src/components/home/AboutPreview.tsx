@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { namedAlt, vehicles } from "@/data/vehicles";
 import { fadeUp, viewportOnce } from "@/lib/motion";
+
+const feature = vehicles[0];
 
 export function AboutPreview() {
   const reduceMotion = useReducedMotion();
@@ -19,12 +22,20 @@ export function AboutPreview() {
           viewport={viewportOnce}
         >
           <Image
-            src="https://images.unsplash.com/photo-1563720360172-67b8f3dce741?auto=format&fit=crop&w=1600&q=80"
-            alt="Architectural corridor suggesting precision and modern infrastructure"
+            src={feature.image.src}
+            alt={namedAlt(feature)}
             fill
             sizes="(max-width: 1023px) 100vw, 50vw"
             className="object-cover"
           />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-obsidian to-transparent p-4">
+            <p className="text-[0.65rem] uppercase tracking-[0.18em] text-gold">
+              {feature.name}
+            </p>
+            <p className="text-sm text-ivory">
+              {feature.make} {feature.model}
+            </p>
+          </div>
         </motion.div>
 
         <motion.div
@@ -39,21 +50,14 @@ export function AboutPreview() {
             Built around trust. Driven by purpose.
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-silver sm:text-base">
-            Shindara Motors & Logistics Limited exists to help clients move with
-            confidence — whether that means sourcing the right vehicle,
-            coordinating logistics, or structuring dependable transport
-            solutions.
-          </p>
-          <p className="mt-4 text-sm leading-relaxed text-silver sm:text-base">
-            Our approach is deliberate: listen carefully, communicate clearly,
-            and deliver with professionalism. We serve private clients and
-            organisations seeking a partner that treats every engagement with
-            integrity and operational care.
+            We buy and sell cars, help with instalments, train people, place
+            drivers, and support delivery and fleets — with clear, simple
+            communication.
           </p>
           <div className="mt-8 flex flex-col gap-3 min-[400px]:flex-row">
-            <Button href="/about">About the Company</Button>
-            <Button href="/contact" variant="secondary">
-              Speak With Us
+            <Button href="/about">About the company</Button>
+            <Button href="/vehicles" variant="secondary">
+              Browse the fleet
             </Button>
           </div>
         </motion.div>

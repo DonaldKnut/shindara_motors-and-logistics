@@ -393,3 +393,35 @@ export function vehicleLabel(vehicle: Vehicle) {
 export function vehicleSpecLabel(vehicle: Vehicle) {
   return `${vehicle.year} ${vehicle.make} ${vehicle.model}`;
 }
+
+/** Alt / caption helper — always leads with the curated unit name */
+export function namedAlt(vehicle: Vehicle, detail?: string) {
+  const base = `${vehicle.name} — ${vehicle.make} ${vehicle.model}`;
+  return detail ? `${base} · ${detail}` : base;
+}
+
+/** Primary Cloudinary frame for every unit (with named alts) */
+export const fleetHeroFrames = vehicles.map((vehicle) => ({
+  id: vehicle.id,
+  name: vehicle.name,
+  src: vehicle.image.src,
+  alt: namedAlt(vehicle),
+  caption: vehicleLabel(vehicle),
+  category: vehicle.category,
+  make: vehicle.make,
+  model: vehicle.model,
+  year: vehicle.year,
+  enquireHref: `/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(vehicleLabel(vehicle))}&vehicleId=${vehicle.id}`,
+}));
+
+/** Flat list of every gallery photo, tagged with unit name */
+export const allNamedFleetPhotos = vehicles.flatMap((vehicle) =>
+  vehicle.gallery.map((frame, index) => ({
+    id: `${vehicle.id}-${index}`,
+    vehicleId: vehicle.id,
+    name: vehicle.name,
+    src: frame.src,
+    alt: namedAlt(vehicle, frame.alt.replace(/^.*?—\s*/, "")),
+    caption: `${vehicle.name} — ${vehicle.make} ${vehicle.model}`,
+  })),
+);

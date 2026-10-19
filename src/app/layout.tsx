@@ -103,11 +103,16 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${sora.variable} ${plusJakarta.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${sora.variable} ${plusJakarta.variable} antialiased`}>
+      <body className={`${plusJakarta.className} antialiased`}>
         <ThemeProvider>
           <a
             href="#main-content"

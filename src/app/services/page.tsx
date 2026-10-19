@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
 import { Button } from "@/components/ui/Button";
 import { Services } from "@/components/home/Services";
 import { ServicesGallery } from "@/components/services/ServicesGallery";
@@ -35,6 +36,7 @@ export default function ServicesPage() {
       </section>
 
       <ServicesGallery />
+      <NamedFleetStrip title="Fleet behind our services" />
       <Services />
     </div>
   );

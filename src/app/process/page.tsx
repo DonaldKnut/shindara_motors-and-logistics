@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
 import { ConciergeEstimator } from "@/components/home/ConciergeEstimator";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { Button } from "@/components/ui/Button";
@@ -35,6 +36,7 @@ export default function ProcessPage() {
       </section>
 
       <HowItWorks />
+      <NamedFleetStrip title="Cars we can help you with" />
       <ConciergeEstimator />
     </div>
   );

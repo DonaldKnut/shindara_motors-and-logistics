@@ -4,9 +4,12 @@ import { BrandStatement } from "@/components/home/BrandStatement";
 import { GlobalNetwork } from "@/components/home/GlobalNetwork";
 import { WhyChoose } from "@/components/home/WhyChoose";
 import { Button } from "@/components/ui/Button";
+import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
 import { values } from "@/data/values";
 import { company } from "@/data/company";
-import { img } from "@/data/media";
+import { namedAlt, vehicles } from "@/data/vehicles";
+
+const aboutHero = vehicles[0];
 
 export const metadata: Metadata = {
   title: "About",
@@ -42,17 +45,26 @@ export default function AboutPage() {
 
           <div className="relative min-h-[18rem] overflow-hidden sm:min-h-[24rem] lg:col-span-6">
             <Image
-              src={img("lexus.jpg", "v1792400602")}
-              alt="Shindara vehicle for sale"
+              src={aboutHero.image.src}
+              alt={namedAlt(aboutHero)}
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover"
               priority
             />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-obsidian to-transparent p-5">
+              <p className="text-[0.65rem] uppercase tracking-[0.18em] text-gold">
+                {aboutHero.name}
+              </p>
+              <p className="text-sm text-ivory">
+                {aboutHero.make} {aboutHero.model}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      <NamedFleetStrip title="Our named fleet" />
       <BrandStatement />
       <WhyChoose />
       <GlobalNetwork />
