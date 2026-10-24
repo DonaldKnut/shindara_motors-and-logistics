@@ -5,6 +5,7 @@ import { GlobalNetwork } from "@/components/home/GlobalNetwork";
 import { WhyChoose } from "@/components/home/WhyChoose";
 import { OpenFormButton } from "@/components/forms/OpenFormButton";
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
+import { PagePromos } from "@/components/home/PagePromos";
 import Link from "next/link";
 import { values } from "@/data/values";
 import { company } from "@/data/company";
@@ -69,6 +70,7 @@ export default function AboutPage() {
       </section>
 
       <NamedFleetStrip title="Our named fleet" />
+      <PagePromos variant="about" />
       <BrandStatement />
       <WhyChoose />
       <GlobalNetwork />

@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import {
-  FleetArt,
-  InstalmentArt,
-  TradeArt,
-} from "@/components/home/illustrations/AdvertArt";
+import { AdvertPhoto } from "@/components/home/AdvertPhoto";
 import { DriverMedia } from "@/components/home/DriverMedia";
 import { TrainingMedia } from "@/components/home/TrainingMedia";
 import { FormLink } from "@/components/forms/FormLink";
 import { easeOut, fadeUp, viewportOnce } from "@/lib/motion";
+import { vehicles } from "@/data/vehicles";
 import type { ReactNode } from "react";
+
+const instalmentCar = vehicles[1] ?? vehicles[0];
+const tradeCar = vehicles[3] ?? vehicles[0];
+const fleetCar = vehicles[4] ?? vehicles[0];
 
 type Advert = {
   id: string;
@@ -35,8 +36,16 @@ const adverts: Advert[] = [
     body: "Choose a vehicle, agree a clear payment plan, and drive with a structure that fits your budget.",
     cta: "Ask about instalments",
     href: "/enquire?type=Sourcing%20%26%20Instalment%20Plans",
-    art: <InstalmentArt className="h-auto w-full max-w-[16rem] text-gold" />,
+    art: (
+      <AdvertPhoto
+        src={instalmentCar.image.src}
+        alt={instalmentCar.image.alt}
+        caption={instalmentCar.name}
+        label="Instalments"
+      />
+    ),
     tone: "deep",
+    mediaWide: true,
   },
   {
     id: "training",
@@ -67,8 +76,16 @@ const adverts: Advert[] = [
     body: "Move vehicles in or out with clear steps and lawful processes — we keep you informed.",
     cta: "Talk import / export",
     href: "/enquire?type=Import%20%2F%20Export",
-    art: <TradeArt className="h-auto w-full max-w-[16rem] text-gold" />,
+    art: (
+      <AdvertPhoto
+        src={tradeCar.image.src}
+        alt={tradeCar.image.alt}
+        caption={tradeCar.name}
+        label="Import · Export"
+      />
+    ),
     tone: "soft",
+    mediaWide: true,
   },
   {
     id: "fleet",
@@ -77,8 +94,16 @@ const adverts: Advert[] = [
     body: "From handing over a single car to keeping a small fleet organised — simple coordination, steady follow-through.",
     cta: "Get fleet support",
     href: "/enquire?type=Delivery%20%26%20Fleet%20Support",
-    art: <FleetArt className="h-auto w-full max-w-[16rem] text-gold" />,
+    art: (
+      <AdvertPhoto
+        src={fleetCar.image.src}
+        alt={fleetCar.image.alt}
+        caption={fleetCar.name}
+        label="Fleet support"
+      />
+    ),
     tone: "deep",
+    mediaWide: true,
   },
 ];
 

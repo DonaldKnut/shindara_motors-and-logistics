@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
 import { OpenFormButton } from "@/components/forms/OpenFormButton";
+import { PagePromos } from "@/components/home/PagePromos";
 import { Services } from "@/components/home/Services";
 import { ServicesGallery } from "@/components/services/ServicesGallery";
 
@@ -38,6 +39,7 @@ export default function ServicesPage() {
       </section>
 
       <ServicesGallery />
+      <PagePromos variant="services" />
       <NamedFleetStrip title="Fleet behind our services" />
       <Services />
     </div>

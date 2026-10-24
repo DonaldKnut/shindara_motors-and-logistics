@@ -2,7 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
@@ -10,14 +9,11 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeProvider";
 import { FormLink } from "@/components/forms/FormLink";
 import { OpenFormButton } from "@/components/forms/OpenFormButton";
-import { useFormModal } from "@/components/forms/FormModalContext";
+import { MegaMenuSlider } from "@/components/layout/MegaMenuSlider";
 import { NavIcon } from "@/components/ui/Icons";
 import { company, navLinks } from "@/data/company";
 import { services } from "@/data/services";
-import { vehicles, vehicleLabel } from "@/data/vehicles";
 import { easeOut } from "@/lib/motion";
-
-const featured = vehicles[0];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,7 +21,6 @@ export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileMegaOpen, setMobileMegaOpen] = useState(false);
   const reduceMotion = useReducedMotion();
-  const { openEnquire } = useFormModal();
   const { theme } = useTheme();
   const isLight = theme === "light";
   const menuId = useId();
@@ -184,7 +179,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Compact mega — services list + one featured unit */}
+      {/* Services mega — list + live fleet/service slider */}
       <AnimatePresence>
         {megaOpen ? (
           <motion.div
@@ -236,46 +231,14 @@ export function Header() {
                   </ul>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    openEnquire({
-                      vehicle: featured,
-                      type: "Vehicle Sales (New & Used)",
-                    });
-                    closeAll();
-                  }}
-                  className="group relative hidden overflow-hidden border border-gold/30 text-left lg:block"
-                >
-                  <div className="relative aspect-[4/5] w-full">
-                    <Image
-                      src={featured.image.src}
-                      alt={featured.image.alt}
-                      fill
-                      sizes="240px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/50 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-3.5">
-                      <p className="text-[0.58rem] uppercase tracking-[0.2em] text-gold">
-                        Featured · {featured.name}
-                      </p>
-                      <p className="mt-1 text-sm text-ivory">
-                        {featured.make} {featured.model}
-                      </p>
-                      <p className="mt-2 text-[0.65rem] uppercase tracking-[0.14em] text-gold-bright">
-                        Enquire →
-                      </p>
-                    </div>
-                  </div>
-                </button>
+                <MegaMenuSlider active={megaOpen} onNavigate={closeAll} />
               </div>
 
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-border)] pt-4">
                 <p className="text-[0.7rem] text-silver">
-                  <span className="text-gold">{featured.name}</span>
+                  <span className="text-gold">Live slider</span>
                   {" — "}
-                  {vehicleLabel(featured).replace(`${featured.name} · `, "")}
+                  services & named fleet · hover to pause
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link

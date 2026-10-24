@@ -3,6 +3,7 @@ import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
 import { PageFormActions } from "@/components/forms/PageFormActions";
 import { ConciergeEstimator } from "@/components/home/ConciergeEstimator";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { PagePromos } from "@/components/home/PagePromos";
 
 export const metadata: Metadata = {
   title: "Our Process",
@@ -29,6 +30,7 @@ export default function ProcessPage() {
       </section>
 
       <HowItWorks />
+      <PagePromos variant="process" />
       <NamedFleetStrip title="Cars we can help you with" />
       <ConciergeEstimator />
     </div>
