@@ -132,10 +132,14 @@
   }
 
   img,
-  svg,
-  video {
+  svg {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Do not force height:auto on video — breaks object-cover stages */
+  video {
+    max-width: 100%;
   }
 
   a {

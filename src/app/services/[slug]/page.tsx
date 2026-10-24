@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { PageFormActions } from "@/components/forms/PageFormActions";
 import { ServiceIcon } from "@/components/ui/Icons";
 import { services } from "@/data/services";
 
@@ -70,19 +70,10 @@ export default async function ServiceDetailPage({
               {service.summary} Share your requirements and our team will respond
               with clear options and next steps.
             </p>
-            <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row">
-              <Button
-                href={`/enquire?type=${encodeURIComponent(
-                  enquiryTypeMap[service.id] ?? "General Enquiry",
-                )}`}
-                showArrow
-              >
-                Enquire about this
-              </Button>
-              <Button href="/contact" variant="secondary" showArrow>
-                Contact us
-              </Button>
-            </div>
+            <PageFormActions
+              enquireLabel="Enquire about this"
+              enquireType={enquiryTypeMap[service.id] ?? "General Enquiry"}
+            />
           </div>
 
           <div className="relative min-h-[18rem] overflow-hidden sm:min-h-[24rem] lg:col-span-6 lg:min-h-[30rem]">

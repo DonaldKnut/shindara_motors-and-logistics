@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { BRAND_LOGO_MARK } from "@/data/media";
 
 export function PageLoader() {
   const [visible, setVisible] = useState(true);
@@ -63,12 +64,12 @@ export function PageLoader() {
                 }
               />
               <Image
-                src="/brand/shindara-logo.png"
+                src={BRAND_LOGO_MARK}
                 alt=""
-                width={88}
-                height={88}
+                width={120}
+                height={120}
                 priority
-                className="relative h-16 w-16 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
+                className="relative h-[4.5rem] w-[4.5rem] object-contain sm:h-20 sm:w-20"
               />
             </div>
             <p className="text-[0.68rem] uppercase tracking-[0.28em] text-gold">

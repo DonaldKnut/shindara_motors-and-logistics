@@ -1,4 +1,5 @@
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
+import { CinemaShowcase } from "@/components/home/CinemaShowcase";
 import { ContactPreview } from "@/components/home/ContactPreview";
 import { Hero } from "@/components/home/Hero";
 import { HomeAdverts } from "@/components/home/HomeAdverts";
@@ -9,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CinemaShowcase />
       <ServicesTeaser />
       <HomeAdverts />
       <VehicleShowcase limit={3} />

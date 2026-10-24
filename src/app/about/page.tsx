@@ -3,8 +3,9 @@ import Image from "next/image";
 import { BrandStatement } from "@/components/home/BrandStatement";
 import { GlobalNetwork } from "@/components/home/GlobalNetwork";
 import { WhyChoose } from "@/components/home/WhyChoose";
-import { Button } from "@/components/ui/Button";
+import { OpenFormButton } from "@/components/forms/OpenFormButton";
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
+import Link from "next/link";
 import { values } from "@/data/values";
 import { company } from "@/data/company";
 import { namedAlt, vehicles } from "@/data/vehicles";
@@ -36,10 +37,13 @@ export default function AboutPage() {
               applicable laws.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact">Contact us</Button>
-              <Button href="/services" variant="secondary">
+              <OpenFormButton kind="contact">Contact us</OpenFormButton>
+              <Link
+                href="/services"
+                className="inline-flex min-h-12 items-center justify-center border border-gold/60 bg-transparent px-6 text-sm font-medium uppercase tracking-[0.14em] text-ivory transition-colors hover:border-gold-bright hover:bg-gold/5 hover:text-gold-bright"
+              >
                 See our services
-              </Button>
+              </Link>
             </div>
           </div>
 

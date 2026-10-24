@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { 
   Calculator, 
   Plane, 
@@ -14,6 +12,7 @@ import {
   Sparkles,
   MessageSquare
 } from "lucide-react";
+import { FormLink } from "@/components/forms/FormLink";
 import { company } from "@/data/company";
 
 type ServiceType = "sourcing" | "freight" | "armoured" | "fleet";
@@ -68,7 +67,6 @@ const routes: RouteOption[] = [
 ];
 
 export function ConciergeEstimator() {
-  const reduceMotion = useReducedMotion();
   const [service, setService] = useState<ServiceType>("sourcing");
   const [selectedRoute, setSelectedRoute] = useState<string>("za-ng");
   const [transitMethod, setTransitMethod] = useState<"ocean" | "air">("ocean");
@@ -259,13 +257,13 @@ export function ConciergeEstimator() {
 
               {/* Call to actions */}
               <div className="mt-8 pt-5 border-t border-white/10 space-y-3">
-                <Link
-                  href={`/enquire?type=Logistics%20Solutions&route=${encodeURIComponent(currentRoute.label)}&mode=${transitMethod}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-bright text-obsidian font-semibold text-xs uppercase tracking-[0.14em] py-3.5 px-4 rounded transition-all shadow-[0_0_20px_rgba(207,168,81,0.35)]"
+                <FormLink
+                  href={`/enquire?type=${encodeURIComponent("Delivery & Fleet Support")}&route=${encodeURIComponent(currentRoute.label)}&mode=${transitMethod}`}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded bg-gold px-4 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-obsidian shadow-[0_0_20px_rgba(207,168,81,0.35)] transition-all hover:bg-gold-bright"
                 >
                   <span>Request Official VIP Quote</span>
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </FormLink>
 
                 <a
                   href={waUrl}

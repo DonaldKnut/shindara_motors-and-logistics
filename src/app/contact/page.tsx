@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { ContactForm } from "@/components/contact/ContactForm";
+import { OpenFormButton } from "@/components/forms/OpenFormButton";
+import { OpenFormOnMount } from "@/components/forms/OpenFormOnMount";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = {
@@ -13,17 +14,30 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="bg-obsidian pt-[5.5rem]">
+      <Suspense fallback={null}>
+        <OpenFormOnMount kind="contact" />
+      </Suspense>
+
       <section className="section-pad">
         <div className="container-shell grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6">
             <p className="eyebrow">Get in Touch</p>
             <h1 className="display-title mt-4 text-[clamp(2.1rem,5.5vw,3.8rem)] text-ivory">
               Contact our team.
             </h1>
             <p className="mt-5 text-base leading-relaxed text-silver">
-              Share your requirements and we will respond with clear next steps.
-              Prefer to speak directly? Use the numbers below.
+              Share your requirements in a modal form — or call and email
+              directly using the details below.
             </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <OpenFormButton kind="contact" showArrow>
+                Open contact form
+              </OpenFormButton>
+              <OpenFormButton variant="secondary">
+                Full enquiry instead
+              </OpenFormButton>
+            </div>
 
             <dl className="mt-10 space-y-6 text-sm">
               <div>
@@ -73,31 +87,21 @@ export default function ContactPage() {
                   {company.address.full}
                 </dd>
               </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.16em] text-gold">
-                  Website
-                </dt>
-                <dd className="mt-2">
-                  <a
-                    href={company.url}
-                    className="text-ivory hover:text-gold-bright"
-                    rel="noopener noreferrer"
-                  >
-                    {company.domain}
-                  </a>
-                </dd>
-              </div>
             </dl>
           </div>
 
-          <div className="border border-white/8 bg-charcoal/50 p-5 sm:p-8 lg:col-span-7">
-            <h2 className="display-title text-2xl text-ivory">Send an enquiry</h2>
-            <p className="mt-2 mb-8 text-sm text-silver">
-              All fields are required. We review every submission carefully.
+          <div className="relative overflow-hidden border border-gold/25 bg-charcoal/50 p-6 sm:p-8 lg:col-span-6">
+            <div className="pointer-events-none absolute -right-10 top-0 h-40 w-40 bg-glow-gold opacity-40" />
+            <p className="text-[0.62rem] uppercase tracking-[0.2em] text-gold">
+              In-page modal
             </p>
-            <Suspense fallback={<p className="text-sm text-silver">Loading form…</p>}>
-              <ContactForm />
-            </Suspense>
+            <h2 className="display-title mt-3 text-2xl text-ivory">
+              No full-page form needed.
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-silver">
+              The contact form opens over this page with a spring transition.
+              Close anytime with Escape or by tapping outside.
+            </p>
           </div>
         </div>
       </section>

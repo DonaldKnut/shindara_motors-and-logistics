@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ContactForm } from "@/components/contact/ContactForm";
+import { ArrowRight, Mail, MessageSquare } from "lucide-react";
+import { OpenFormButton } from "@/components/forms/OpenFormButton";
 import { company } from "@/data/company";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 
@@ -25,7 +25,7 @@ export function ContactPreview() {
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-silver sm:text-base">
             Looking to buy or sell a car, set up instalments, train, hire a
-            driver, or manage a fleet? Send a message — we will respond clearly.
+            driver, or manage a fleet? Open a form — we will respond clearly.
           </p>
 
           <dl className="mt-8 space-y-5 text-sm">
@@ -74,15 +74,48 @@ export function ContactPreview() {
         </motion.div>
 
         <motion.div
-          className="relative border border-white/8 bg-charcoal/50 p-5 sm:p-8 lg:col-span-7"
+          className="relative overflow-hidden border border-gold/25 bg-charcoal/50 p-6 sm:p-8 lg:col-span-7"
           variants={fadeUp}
           initial={reduceMotion ? false : "hidden"}
           whileInView={reduceMotion ? undefined : "visible"}
           viewport={viewportOnce}
         >
-          <Suspense fallback={<p className="text-sm text-silver">Loading form…</p>}>
-            <ContactForm />
-          </Suspense>
+          <div className="pointer-events-none absolute -right-16 top-0 h-48 w-48 bg-glow-gold opacity-40" />
+          <p className="text-[0.62rem] uppercase tracking-[0.2em] text-gold">
+            Forms · In-page modal
+          </p>
+          <h3 className="display-title mt-3 text-[clamp(1.5rem,3vw,2.1rem)] text-ivory">
+            Write to us without leaving the page.
+          </h3>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-silver">
+            Enquiry for cars and services, or a shorter contact note — both open
+            in a smooth modal and email hello@shindaraautos.com.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <OpenFormButton showArrow>
+              Open enquiry form
+            </OpenFormButton>
+            <OpenFormButton kind="contact" variant="secondary" icon={MessageSquare}>
+              Open contact form
+            </OpenFormButton>
+          </div>
+
+          <p className="mt-6 flex items-start gap-2 text-xs text-silver">
+            <Mail className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" />
+            Prefer email?{" "}
+            <a
+              href={`mailto:${company.email}`}
+              className="text-ivory underline-offset-2 hover:text-gold-bright hover:underline"
+            >
+              {company.email}
+            </a>
+          </p>
+
+          <p className="mt-4 inline-flex items-center gap-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-gold/80">
+            Esc to close · tap outside to dismiss
+            <ArrowRight className="h-3 w-3" />
+          </p>
         </motion.div>
       </div>
     </section>

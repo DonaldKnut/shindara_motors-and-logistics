@@ -8,7 +8,9 @@ import { ArrowUpRight, ChevronDown, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useTheme } from "@/components/theme/ThemeProvider";
-import { Button } from "@/components/ui/Button";
+import { FormLink } from "@/components/forms/FormLink";
+import { OpenFormButton } from "@/components/forms/OpenFormButton";
+import { useFormModal } from "@/components/forms/FormModalContext";
 import { NavIcon } from "@/components/ui/Icons";
 import { company, navLinks } from "@/data/company";
 import { services } from "@/data/services";
@@ -23,6 +25,7 @@ export function Header() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileMegaOpen, setMobileMegaOpen] = useState(false);
   const reduceMotion = useReducedMotion();
+  const { openEnquire } = useFormModal();
   const { theme } = useTheme();
   const isLight = theme === "light";
   const menuId = useId();
@@ -134,13 +137,13 @@ export function Header() {
                 />
               </button>
             ) : (
-              <Link
+              <FormLink
                 key={link.href}
                 href={link.href}
                 className="inline-flex items-center px-2.5 py-2 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ivory/90 transition-colors hover:text-gold-bright xl:px-3"
               >
                 {link.label}
-              </Link>
+              </FormLink>
             ),
           )}
         </nav>
@@ -148,9 +151,9 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle className="h-10 w-10 shrink-0" />
           <div className="hidden items-center gap-3 lg:flex">
-            <Button href="/enquire" size="sm" variant="secondary" showArrow>
+            <OpenFormButton size="sm" variant="secondary" showArrow>
               Enquire
-            </Button>
+            </OpenFormButton>
           </div>
           <button
             type="button"
@@ -233,10 +236,16 @@ export function Header() {
                   </ul>
                 </div>
 
-                <Link
-                  href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicleId=${featured.id}`}
-                  onClick={closeAll}
-                  className="group relative hidden overflow-hidden border border-gold/30 lg:block"
+                <button
+                  type="button"
+                  onClick={() => {
+                    openEnquire({
+                      vehicle: featured,
+                      type: "Vehicle Sales (New & Used)",
+                    });
+                    closeAll();
+                  }}
+                  className="group relative hidden overflow-hidden border border-gold/30 text-left lg:block"
                 >
                   <div className="relative aspect-[4/5] w-full">
                     <Image
@@ -259,7 +268,7 @@ export function Header() {
                       </p>
                     </div>
                   </div>
-                </Link>
+                </button>
               </div>
 
               <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--color-border)] pt-4">
@@ -276,13 +285,13 @@ export function Header() {
                   >
                     Fleet
                   </Link>
-                  <Link
+                  <FormLink
                     href="/enquire"
                     onClick={closeAll}
                     className="text-[0.65rem] uppercase tracking-[0.16em] text-gold transition-colors hover:text-gold-bright"
                   >
                     Enquire
-                  </Link>
+                  </FormLink>
                 </div>
               </div>
             </div>
@@ -355,7 +364,7 @@ export function Header() {
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <Link
+                  <FormLink
                     key={link.href}
                     href={link.href}
                     className="flex items-center gap-3 border-b border-[var(--color-border)] py-3.5 text-[0.75rem] uppercase tracking-[0.18em] text-ivory"
@@ -365,13 +374,13 @@ export function Header() {
                       <NavIcon name={link.icon} />
                     </span>
                     {link.label}
-                  </Link>
+                  </FormLink>
                 ),
               )}
               <div className="mt-5 flex flex-col gap-3">
-                <Button href="/enquire" onClick={closeAll} showArrow>
+                <OpenFormButton onOpen={closeAll} showArrow>
                   Start an Enquiry
-                </Button>
+                </OpenFormButton>
                 <a
                   href={company.phones.southAfrica.href}
                   className="inline-flex items-center justify-center gap-2 text-sm text-silver"

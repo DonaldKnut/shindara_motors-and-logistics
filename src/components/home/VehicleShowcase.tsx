@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -15,6 +14,7 @@ import {
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { useFormModal } from "@/components/forms/FormModalContext";
 import { MediaSlider } from "@/components/ui/MediaSlider";
 import {
   vehicles,
@@ -23,10 +23,12 @@ import {
   type VehicleCategory,
 } from "@/data/vehicles";
 import { company } from "@/data/company";
-import { fadeUp, staggerContainer, viewportOnce, easeOut } from "@/lib/motion";
+import { cldSized } from "@/data/media";
+import { fadeUp, viewportOnce, easeOut } from "@/lib/motion";
 
 export function VehicleShowcase({ limit }: { limit?: number }) {
   const reduceMotion = useReducedMotion();
+  const { openEnquire } = useFormModal();
   const [selectedCategory, setSelectedCategory] =
     useState<VehicleCategory>("All");
   const [galleryVehicle, setGalleryVehicle] = useState<Vehicle | null>(null);
@@ -70,7 +72,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
           <SectionHeading
             eyebrow="Live Inventory"
             title="Cars available to enquire about."
-            description="Real photos from our inventory. Open a gallery, then enquire — messages go to hello@ and oluwasina@shindaraautos.com."
+            description="Real photos from our inventory. Open a gallery, then enquire — messages go to hello@shindaraautos.com."
           />
           <Button href="/vehicles" variant="secondary" className="self-start shrink-0 lg:self-auto">
             View Complete Fleet
@@ -97,12 +99,8 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
           ))}
         </div>
 
-        <motion.div
+        <div
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          variants={staggerContainer}
-          initial={reduceMotion ? false : "hidden"}
-          whileInView={reduceMotion ? undefined : "visible"}
-          viewport={viewportOnce}
           key={selectedCategory}
         >
           {displayItems.map((vehicle, index) => {
@@ -116,6 +114,9 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
               <motion.article
                 key={vehicle.id}
                 variants={fadeUp}
+                initial={reduceMotion ? false : "hidden"}
+                whileInView={reduceMotion ? undefined : "visible"}
+                viewport={viewportOnce}
                 layout={!reduceMotion}
                 className="group flex flex-col overflow-hidden rounded-xl border border-white/10 glass-card transition-all duration-500 hover:border-gold/50 hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.9),0_0_25px_rgba(207,168,81,0.15)]"
               >
@@ -133,11 +134,12 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                     viewport={{ once: true }}
                   >
                     <Image
-                      src={vehicle.image.src}
+                      src={cldSized(vehicle.image.src, 900, "good")}
                       alt={vehicle.image.alt}
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      quality={75}
                     />
                   </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-black/30" />
@@ -238,13 +240,14 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                       <Images className="h-3.5 w-3.5 text-gold" />
                       Open photo gallery
                     </button>
-                    <Link
-                      href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(label)}&vehicleId=${vehicle.id}`}
+                    <button
+                      type="button"
+                      onClick={() => openEnquire({ vehicle })}
                       className="group/btn inline-flex w-full items-center justify-center gap-2 rounded border border-gold/40 bg-charcoal-light px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-gold-bright transition-all hover:bg-gold hover:text-obsidian"
                     >
                       <span>Enquire</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-1" />
-                    </Link>
+                    </button>
                     <a
                       href={waLink}
                       target="_blank"
@@ -259,7 +262,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
               </motion.article>
             );
           })}
-        </motion.div>
+        </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 border-t border-white/10 py-4 text-center text-xs text-silver/70">
           <span className="inline-flex items-center gap-1.5">
@@ -268,7 +271,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-gold" />
-            Enquiries route to hello@ & oluwasina@shindaraautos.com
+            Enquiries route to hello@shindaraautos.com
           </span>
         </div>
       </div>
@@ -315,6 +318,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
               </div>
 
               <MediaSlider
+                key={galleryVehicle.id}
                 slides={galleryVehicle.gallery.map((frame) => ({
                   src: frame.src,
                   alt: frame.alt,
@@ -324,6 +328,7 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                 aspectClassName="aspect-[4/5] min-[480px]:aspect-[16/10]"
                 autoPlayMs={4500}
                 rounded={false}
+                stageWidth={1280}
               />
 
               <div className="flex flex-col gap-2 border-t border-white/10 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
@@ -331,19 +336,23 @@ export function VehicleShowcase({ limit }: { limit?: number }) {
                   {galleryVehicle.gallery.length} photos · {galleryVehicle.color} ·{" "}
                   {galleryVehicle.status}
                 </p>
-                <Link
-                  href={`/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(vehicleLabel(galleryVehicle))}&vehicleId=${galleryVehicle.id}`}
+                <button
+                  type="button"
                   className="inline-flex items-center justify-center gap-2 bg-gold px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-obsidian transition-opacity hover:opacity-90"
-                  onClick={() => setGalleryVehicle(null)}
+                  onClick={() => {
+                    openEnquire({ vehicle: galleryVehicle });
+                    setGalleryVehicle(null);
+                  }}
                 >
                   Enquire about this vehicle
                   <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+                </button>
               </div>
             </motion.div>
           </motion.div>
         ) : null}
       </AnimatePresence>
+
     </section>
   );
 }

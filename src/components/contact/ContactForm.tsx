@@ -30,10 +30,20 @@ const initial: FormState = {
   website: "",
 };
 
-export function ContactForm() {
+type ContactFormProps = {
+  initialEnquiryType?: string;
+  initialMessage?: string;
+  compact?: boolean;
+};
+
+export function ContactForm({
+  initialEnquiryType,
+  initialMessage,
+  compact = false,
+}: ContactFormProps = {}) {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormState>(() => {
-    const type = searchParams.get("type");
+    const type = initialEnquiryType ?? searchParams.get("type");
     const vehicle = searchParams.get("vehicle");
     const matchedType =
       type && enquiryTypes.includes(type as (typeof enquiryTypes)[number])
@@ -43,9 +53,9 @@ export function ContactForm() {
     return {
       ...initial,
       enquiryType: matchedType,
-      message: vehicle
-        ? `I would like to enquire about: ${vehicle}\n\n`
-        : "",
+      message:
+        initialMessage ||
+        (vehicle ? `I would like to enquire about: ${vehicle}\n\n` : ""),
     };
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>(
@@ -133,7 +143,7 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="space-y-5"
+      className={compact ? "space-y-4" : "space-y-5"}
       noValidate
       aria-describedby="form-status"
     >

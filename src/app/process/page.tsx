@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
+import { PageFormActions } from "@/components/forms/PageFormActions";
 import { ConciergeEstimator } from "@/components/home/ConciergeEstimator";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Our Process",
@@ -24,14 +24,7 @@ export default function ProcessPage() {
             Tell us what you need. We show clear options. You agree the details.
             We handle the next steps — sales, training, drivers, or delivery.
           </p>
-          <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row">
-            <Button href="/enquire" showArrow>
-              Send an enquiry
-            </Button>
-            <Button href="/contact" variant="secondary">
-              Contact us
-            </Button>
-          </div>
+          <PageFormActions />
         </div>
       </section>
 

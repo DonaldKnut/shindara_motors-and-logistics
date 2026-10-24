@@ -2,7 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { company, navLinks } from "@/data/company";
 import { services } from "@/data/services";
+import { FormLink } from "@/components/forms/FormLink";
 import { NewsletterForm } from "@/components/forms/NewsletterForm";
+import { BRAND_LOGO } from "@/data/media";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -30,11 +32,11 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex" aria-label="Shindara home">
               <Image
-                src="/brand/shindara-logo.png"
-                alt="Shindara Motors & Logistics Limited"
-                width={180}
-                height={180}
-                className="h-auto w-[5.5rem] object-contain"
+                src={BRAND_LOGO}
+                alt="Shindara Automotive & Logistics Limited"
+                width={200}
+                height={200}
+                className="h-auto w-[6.5rem] object-contain"
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-silver">
@@ -65,9 +67,12 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-silver">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-gold-bright transition-colors">
+                  <FormLink
+                    href={link.href}
+                    className="transition-colors hover:text-gold-bright"
+                  >
                     {link.label}
-                  </Link>
+                  </FormLink>
                 </li>
               ))}
             </ul>
@@ -156,9 +161,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-gold-bright">
               Terms of Use
             </Link>
-            <Link href="/enquire" className="hover:text-gold-bright">
+            <FormLink href="/enquire" className="hover:text-gold-bright">
               Major Enquiry
-            </Link>
+            </FormLink>
             <a
               href={company.url}
               className="hover:text-gold-bright"

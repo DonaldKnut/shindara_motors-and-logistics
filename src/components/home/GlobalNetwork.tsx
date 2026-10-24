@@ -6,13 +6,11 @@ import {
   Building2, 
   MapPin, 
   Phone, 
-  Clock, 
   ArrowUpRight, 
-  Anchor, 
-  Plane, 
   ShieldCheck,
   Compass
 } from "lucide-react";
+import { FormLink } from "@/components/forms/FormLink";
 import { company } from "@/data/company";
 
 interface Hub {
@@ -202,13 +200,13 @@ export function GlobalNetwork() {
               </div>
 
               <div className="pt-4 border-t border-white/10 flex flex-col gap-2.5">
-                <a
-                  href={`/enquire?type=Logistics%20Solutions&hub=${current.city}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-bright text-obsidian font-semibold text-xs uppercase tracking-[0.14em] py-3 px-4 rounded transition-all"
+                <FormLink
+                  href={`/enquire?type=${encodeURIComponent("Delivery & Fleet Support")}&hub=${current.city}`}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded bg-gold px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-obsidian transition-all hover:bg-gold-bright"
                 >
                   <span>Route Inquiry via {current.city}</span>
                   <ArrowUpRight className="h-4 w-4" />
-                </a>
+                </FormLink>
 
                 <a
                   href={company.whatsapp.href}

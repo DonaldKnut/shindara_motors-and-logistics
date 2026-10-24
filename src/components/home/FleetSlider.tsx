@@ -5,13 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import { vehicles, vehicleLabel } from "@/data/vehicles";
+import { useFormModal } from "@/components/forms/FormModalContext";
+import { vehicles } from "@/data/vehicles";
 import { easeOut } from "@/lib/motion";
 
 const AUTO_MS = 6500;
 
 export function FleetSlider() {
   const reduceMotion = useReducedMotion();
+  const { openEnquire } = useFormModal();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
@@ -41,8 +43,6 @@ export function FleetSlider() {
   }, [count, go, paused, reduceMotion, index]);
 
   if (!active) return null;
-
-  const enquireHref = `/enquire?type=${encodeURIComponent("Vehicle Sales (New & Used)")}&vehicle=${encodeURIComponent(vehicleLabel(active))}&vehicleId=${active.id}`;
 
   const slideVariants = {
     enter: (dir: number) =>
@@ -141,13 +141,14 @@ export function FleetSlider() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href={enquireHref}
+              <button
+                type="button"
+                onClick={() => openEnquire({ vehicle: active })}
                 className="group inline-flex items-center gap-2 bg-gold px-5 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-obsidian transition-opacity hover:opacity-90"
               >
                 Enquire on {active.name}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              </button>
               <Link
                 href="/vehicles"
                 className="inline-flex items-center gap-2 border border-white/20 px-5 py-3 text-[0.7rem] uppercase tracking-[0.16em] text-ivory transition-colors hover:border-gold/50 hover:text-gold"
@@ -252,6 +253,7 @@ export function FleetSlider() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }

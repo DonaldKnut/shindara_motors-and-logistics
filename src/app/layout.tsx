@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Sora } from "next/font/google";
+import { FormModalRoot } from "@/components/forms/FormModalRoot";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { company } from "@/data/company";
+import { BRAND_LOGO } from "@/data/media";
 import "./globals.css";
 
 const sora = Sora({
@@ -42,10 +44,10 @@ export const metadata: Metadata = {
     siteName: company.legalName,
     images: [
       {
-        url: "/brand/shindara-logo.png",
-        width: 1200,
-        height: 1200,
-        alt: "Shindara Motors & Logistics Limited logo",
+        url: BRAND_LOGO,
+        width: 720,
+        height: 720,
+        alt: "Shindara Automotive & Logistics Limited logo",
       },
     ],
   },
@@ -53,11 +55,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${company.legalName}`,
     description: company.focus,
-    images: ["/brand/shindara-logo.png"],
+    images: [BRAND_LOGO],
   },
   icons: {
-    icon: [{ url: "/brand/shindara-logo.png", type: "image/png" }],
-    apple: [{ url: "/brand/shindara-logo.png" }],
+    icon: [{ url: BRAND_LOGO, type: "image/png" }],
+    apple: [{ url: BRAND_LOGO }],
   },
   robots: {
     index: true,
@@ -99,7 +101,7 @@ export default function RootLayout({
       addressCountry: "NG",
     },
     slogan: company.tagline,
-    image: `${siteUrl}/brand/shindara-logo.png`,
+    image: BRAND_LOGO,
   };
 
   return (
@@ -114,17 +116,19 @@ export default function RootLayout({
       </head>
       <body className={`${plusJakarta.className} antialiased`}>
         <ThemeProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-obsidian"
-          >
-            Skip to content
-          </a>
-          <PageLoader />
-          <Header />
-          <main id="main-content">{children}</main>
-          <Footer />
-          <WhatsAppFab />
+          <FormModalRoot>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:text-obsidian"
+            >
+              Skip to content
+            </a>
+            <PageLoader />
+            <Header />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <WhatsAppFab />
+          </FormModalRoot>
         </ThemeProvider>
         <script
           type="application/ld+json"

@@ -62,7 +62,9 @@ export async function POST(request: Request) {
     ].join("\n");
 
     const result = await sendTransactionalMail({
-      subject: `Shindara major enquiry [${reference}] — ${payload.enquiryType}`,
+      subject: payload.vehicleInterest
+        ? `Shindara enquiry [${reference}] — ${payload.vehicleInterest}`
+        : `Shindara enquiry [${reference}] — ${payload.enquiryType}`,
       text: textBody,
       html: buildBrandedEmailHtml({
         title: `Major enquiry ${reference}`,

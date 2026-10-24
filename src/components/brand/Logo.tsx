@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BRAND_LOGO } from "@/data/media";
 
 type LogoProps = {
   priority?: boolean;
@@ -9,26 +10,25 @@ type LogoProps = {
 };
 
 /**
- * Official Shindara logo — transparent PNG derived from the supplied asset
- * (black background removed; mark and typography unchanged).
+ * Official Shindara Automotive & Logistics lockup (Cloudinary).
  */
 export function Logo({ priority = false, className = "", compact = false }: LogoProps) {
   return (
     <Link
       href="/"
       className={`inline-flex shrink-0 items-center focus-visible:outline-offset-4 ${className}`}
-      aria-label="Shindara Motors & Logistics Limited — Home"
+      aria-label="Shindara Automotive & Logistics Limited — Home"
     >
       <Image
-        src="/brand/shindara-logo.png"
-        alt="Shindara Motors & Logistics Limited"
-        width={compact ? 280 : 320}
-        height={compact ? 280 : 320}
+        src={BRAND_LOGO}
+        alt="Shindara Automotive & Logistics Limited"
+        width={compact ? 200 : 240}
+        height={compact ? 200 : 240}
         priority={priority}
-        className={`h-auto w-[clamp(3.75rem,16vw,7rem)] object-contain ${
+        className={`h-auto w-[clamp(4.25rem,18vw,7.5rem)] object-contain ${
           compact
-            ? "min-[360px]:w-[5rem] sm:w-[5.75rem] lg:w-[6.5rem]"
-            : "sm:w-[6.5rem] lg:w-[7.25rem]"
+            ? "min-[360px]:w-[5.25rem] sm:w-[6rem] lg:w-[6.75rem]"
+            : "sm:w-[6.75rem] lg:w-[7.75rem]"
         }`}
       />
     </Link>

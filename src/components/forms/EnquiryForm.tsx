@@ -32,21 +32,44 @@ type Status =
 const fieldClass =
   "w-full min-w-0 border border-white/12 bg-obsidian/60 px-4 py-3 text-sm text-ivory placeholder:text-silver/50 transition-colors focus:border-gold/60 focus:outline-none";
 
-export function EnquiryForm() {
+type EnquiryFormProps = {
+  /** Prefill a specific vehicle (used by the modal — no page navigation) */
+  initialVehicleId?: string;
+  initialVehicleLabel?: string;
+  initialEnquiryType?: string;
+  initialMessage?: string;
+  /** Tighter spacing + shorter brief for modal use */
+  compact?: boolean;
+};
+
+export function EnquiryForm({
+  initialVehicleId,
+  initialVehicleLabel,
+  initialEnquiryType,
+  initialMessage,
+  compact = false,
+}: EnquiryFormProps = {}) {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormState>(() => {
-    const type = searchParams.get("type");
+    const type = initialEnquiryType ?? searchParams.get("type");
     const vehicleParam = searchParams.get("vehicle");
-    const vehicleId = searchParams.get("vehicleId");
+    const vehicleId = initialVehicleId ?? searchParams.get("vehicleId");
     const fromId = vehicleId ? getVehicleById(vehicleId) : undefined;
     const vehicle =
-      (fromId ? vehicleLabel(fromId) : null) || vehicleParam || "";
+      initialVehicleLabel ||
+      (fromId ? vehicleLabel(fromId) : null) ||
+      vehicleParam ||
+      "";
     const matched =
       type && enquiryTypes.includes(type as (typeof enquiryTypes)[number])
         ? (type as (typeof enquiryTypes)[number])
         : vehicle
           ? "Vehicle Sales (New & Used)"
           : "General Enquiry";
+
+    const seedMessage =
+      initialMessage ||
+      (vehicle ? `I would like to enquire about: ${vehicle}\n\n` : "");
 
     return {
       name: "",
@@ -59,9 +82,7 @@ export function EnquiryForm() {
       timeline: "",
       preferredContact: "Email",
       vehicleInterest: vehicle,
-      message: vehicle
-        ? `I would like to enquire about: ${vehicle}\n\n`
-        : "",
+      message: seedMessage,
       consent: false,
       website: "",
     };
@@ -150,8 +171,8 @@ export function EnquiryForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5" noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className={compact ? "space-y-4" : "space-y-5"} noValidate>
+      <div className={`grid sm:grid-cols-2 ${compact ? "gap-4" : "gap-5"}`}>
         <Field
           id="enq-name"
           label="Full name"
@@ -305,7 +326,7 @@ export function EnquiryForm() {
         </label>
         <textarea
           id="enq-message"
-          rows={7}
+          rows={compact ? 4 : 7}
           className={`${fieldClass} resize-y`}
           value={form.message}
           onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}

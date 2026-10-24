@@ -4,13 +4,14 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import {
-  DriverArt,
   FleetArt,
   InstalmentArt,
   TradeArt,
-  TrainingArt,
 } from "@/components/home/illustrations/AdvertArt";
-import { easeOut, fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
+import { DriverMedia } from "@/components/home/DriverMedia";
+import { TrainingMedia } from "@/components/home/TrainingMedia";
+import { FormLink } from "@/components/forms/FormLink";
+import { easeOut, fadeUp, viewportOnce } from "@/lib/motion";
 import type { ReactNode } from "react";
 
 type Advert = {
@@ -22,6 +23,8 @@ type Advert = {
   href: string;
   art: ReactNode;
   tone: "deep" | "soft";
+  /** Wider media column — used for photo/video training collage */
+  mediaWide?: boolean;
 };
 
 const adverts: Advert[] = [
@@ -37,13 +40,14 @@ const adverts: Advert[] = [
   },
   {
     id: "training",
-    eyebrow: "Learn the craft",
-    title: "Automotive training, made practical.",
-    body: "Clear lessons for individuals and teams who want real skills — not jargon.",
+    eyebrow: "Inside the workshop",
+    title: "See what training looks like.",
+    body: "From the driver’s seat to the open hood — cabin controls, engine layout, and the habits that stick. Real cars. Real sessions. Skills you can use the same week.",
     cta: "Enquire about training",
     href: "/enquire?type=Automotive%20Training",
-    art: <TrainingArt className="h-auto w-full max-w-[16rem] text-gold" />,
+    art: <TrainingMedia />,
     tone: "soft",
+    mediaWide: true,
   },
   {
     id: "drivers",
@@ -52,8 +56,9 @@ const adverts: Advert[] = [
     body: "We recruit and place drivers for homes and businesses — screened, reliable, and ready.",
     cta: "Request a driver",
     href: "/enquire?type=Driver%20Placement",
-    art: <DriverArt className="h-auto w-full max-w-[16rem] text-gold" />,
+    art: <DriverMedia />,
     tone: "deep",
+    mediaWide: true,
   },
   {
     id: "trade",
@@ -82,7 +87,6 @@ export function HomeAdverts() {
 
   return (
     <section aria-label="Featured offers" className="relative">
-      {/* Intro ribbon */}
       <div className="border-y border-[var(--color-border)] bg-obsidian">
         <div className="container-shell flex flex-col gap-3 py-8 sm:flex-row sm:items-end sm:justify-between sm:py-10">
           <div>
@@ -101,23 +105,20 @@ export function HomeAdverts() {
         </div>
       </div>
 
-      <motion.div
-        variants={staggerContainer}
-        initial={reduceMotion ? false : "hidden"}
-        whileInView={reduceMotion ? undefined : "visible"}
-        viewport={viewportOnce}
-      >
+      <div>
         {adverts.map((ad, index) => {
           const reverse = index % 2 === 1;
           return (
             <motion.article
               key={ad.id}
               variants={fadeUp}
+              initial={reduceMotion ? false : "hidden"}
+              whileInView={reduceMotion ? undefined : "visible"}
+              viewport={viewportOnce}
               className={`relative overflow-hidden border-b border-[var(--color-border)] ${
                 ad.tone === "deep" ? "bg-obsidian-deep" : "bg-charcoal"
               }`}
             >
-              {/* Soft ambient mark */}
               <div
                 className={`pointer-events-none absolute h-64 w-64 rounded-full bg-glow-gold opacity-40 ${
                   reverse ? "-left-16 top-1/2 -translate-y-1/2" : "-right-16 top-1/2 -translate-y-1/2"
@@ -131,13 +132,19 @@ export function HomeAdverts() {
                   }`}
                 >
                   <motion.div
-                    className="relative flex aspect-square w-full max-w-[18rem] items-center justify-center border border-gold/20 bg-obsidian/40"
+                    className={`relative flex w-full items-center justify-center ${
+                      ad.mediaWide
+                        ? "max-w-[22rem]"
+                        : "aspect-square max-w-[18rem] border border-gold/20 bg-obsidian/40"
+                    }`}
                     initial={reduceMotion ? false : { opacity: 0, scale: 0.94 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.7, ease: easeOut }}
                   >
-                    <div className="pointer-events-none absolute inset-3 border border-dashed border-gold/15" />
+                    {!ad.mediaWide ? (
+                      <div className="pointer-events-none absolute inset-3 border border-dashed border-gold/15" />
+                    ) : null}
                     {ad.art}
                   </motion.div>
                 </div>
@@ -159,20 +166,20 @@ export function HomeAdverts() {
                     {ad.body}
                   </p>
                   <div className={`mt-7 ${reverse ? "lg:flex lg:justify-end" : ""}`}>
-                    <Link
+                    <FormLink
                       href={ad.href}
                       className="group inline-flex items-center gap-2 border border-gold/50 bg-transparent px-5 py-3 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold-bright transition-colors hover:border-gold hover:bg-gold/10"
                     >
                       {ad.cta}
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
+                    </FormLink>
                   </div>
                 </div>
               </div>
             </motion.article>
           );
         })}
-      </motion.div>
+      </div>
     </section>
   );
 }

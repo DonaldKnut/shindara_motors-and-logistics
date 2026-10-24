@@ -27,8 +27,9 @@ export const staggerContainer = {
   },
 };
 
+/** Mobile-safe: tall sections never reach amount:0.2 of their own height. */
 export const viewportOnce = {
   once: true,
-  amount: 0.2,
-  margin: "0px 0px -8% 0px",
-} as const;
+  amount: "some" as const,
+  margin: "0px 0px -5% 0px",
+};

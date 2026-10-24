@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { NamedFleetStrip } from "@/components/fleet/NamedFleetStrip";
-import { Button } from "@/components/ui/Button";
+import { OpenFormButton } from "@/components/forms/OpenFormButton";
 import { Services } from "@/components/home/Services";
 import { ServicesGallery } from "@/components/services/ServicesGallery";
 
@@ -25,12 +26,13 @@ export default function ServicesPage() {
             support — choose a service below or send an enquiry.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/enquire" showArrow>
-              Send an enquiry
-            </Button>
-            <Button href="/process" variant="secondary">
+            <OpenFormButton showArrow>Send an enquiry</OpenFormButton>
+            <Link
+              href="/process"
+              className="inline-flex min-h-12 items-center justify-center border border-gold/60 bg-transparent px-6 text-sm font-medium uppercase tracking-[0.14em] text-ivory transition-colors hover:border-gold-bright hover:bg-gold/5 hover:text-gold-bright"
+            >
               How it works
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
